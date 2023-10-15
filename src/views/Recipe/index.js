@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
 import { useCallback } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import RecipeLayout from '../../components/RecipeLayout';
+import Navbar from '../../components/Navbar';
 
 // Tela receitas do APP
 const RecipeScreen = () => {
@@ -26,18 +27,23 @@ const RecipeScreen = () => {
     }
 
     return (
-        <ScrollView>
-            <SafeAreaView style={styles.RecipeScreenContainer}>
-                <StatusBar style="auto" />
-                <RecipeLayout />
-            </SafeAreaView>
-        </ScrollView>
+        <View>
+            <ScrollView>
+                <SafeAreaView style={styles.RecipeScreenContainer}>
+                    <StatusBar style="auto" />
+                    <RecipeLayout />
+                </SafeAreaView>
+            </ScrollView>
+            <Navbar />
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     RecipeScreenContainer: {
-        padding: 32,
+        paddingVertical: 40,
+        paddingHorizontal: 20,
+        marginBottom: 40,
         backgroundColor: '#fff',
     },
 });

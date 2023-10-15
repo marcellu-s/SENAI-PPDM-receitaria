@@ -42,7 +42,9 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
     homeScreenContainer: {
-        padding: 32,
+        paddingVertical: 40,
+        paddingHorizontal: 20,
+        marginBottom: 40,
         backgroundColor: '#fff',
     },
 });

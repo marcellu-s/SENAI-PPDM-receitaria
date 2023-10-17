@@ -3,6 +3,8 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+
+import { loginCall } from '../../services/api';
 import logo from '../../assets/images/logo.png';
 
 export default function LoginScreen() {
@@ -35,7 +37,18 @@ export default function LoginScreen() {
                     </View>
                 </View>
                 <View style={{marginTop: 32}}>
-                    <TouchableOpacity style={styles.btn}>
+                    <TouchableOpacity style={styles.btn} onPress={async () => {
+
+                        const isSuccess = await loginCall(email, password);
+
+                        if (isSuccess.status === true) {
+
+                            navigation.navigate('Home');
+                        } else {
+
+                            alert(isSuccess.msg);
+                        }
+                    }}>
                         <Text style={{textAlign: 'center', fontFamily: 'Poppins-Bold', fontSize: 20, color: '#fff'}}>ENTRAR</Text>
                     </TouchableOpacity>
                 </View>

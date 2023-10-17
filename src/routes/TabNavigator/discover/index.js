@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import RecipeStack from '../../StackNavigator/recipe';
+import RecipesDisplay from '../../../components/RecipesDisplay';
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -86,9 +87,9 @@ const DiscoverTabNavigator = () => {
 
     return (
         <Tab.Navigator initialRouteName={"Popular"} screenOptions={{ headerShown: false }} tabBar={(props) => <TabBar {...props} currentRoute={route} setRoute={setRoute} />}>
-            <Tab.Screen name="Popular" component={Aa} />
-            <Tab.Screen name="New" component={Aa} />
-            <Tab.Screen name="All" component={Aa} />
+            <Tab.Screen name="Popular" component={RecipesDisplay} />
+            <Tab.Screen name="New" component={RecipesDisplay} />
+            <Tab.Screen name="All" component={RecipesDisplay} />
         </Tab.Navigator>
     );
 }

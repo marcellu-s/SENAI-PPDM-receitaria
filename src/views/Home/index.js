@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
 
+
 import DiscoverTabNavigator from '../../routes/TabNavigator/discover';
 import RecipeStack from '../../routes/StackNavigator/recipe';
 import RecipesDisplay from '../../components/RecipesDisplay';
@@ -13,16 +14,16 @@ const HomeScreen = () => {
 
     return (
         <View style={{flex: 1, backgroundColor: '#fff'}}>
-            <ScrollView >
+            {/* <ScrollView > */}
                 <SafeAreaView style={styles.homeScreenContainer}>
                     <StatusBar style="auto" />
                     <HeaderApp />
                     <DiscoverTabNavigator />
 
-                    <RecipesDisplay />
+                    {/* <RecipesDisplay /> */}
                     {/* <RecipeStack /> */}
                 </SafeAreaView>
-            </ScrollView>
+            {/* </ScrollView> */}
             <Navbar />
         </View>
     );

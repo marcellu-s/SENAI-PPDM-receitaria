@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import RecipeStack from '../../StackNavigator/recipe';
 import HomeScreen from '../../../views/Home';
+import DiscoverTabNavigator from '../discover';
 
 // import SettingsScreen from '../../views/Settings';
 // import HomeScreen from '../../views/Home';
@@ -72,6 +73,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     }
 });
+
+const Aa = () => {
+    return (
+    <View style={{flex: 1, backgroundColor: 'blue'}}>
+        <Text>aaaaaaaaa</Text>
+    </View>
+    )
+}
 
 const TabNavigator = () => {
     const [route, setRoute] = useState("MyHome");

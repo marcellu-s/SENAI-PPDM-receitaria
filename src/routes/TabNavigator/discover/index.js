@@ -74,14 +74,6 @@ const styles = StyleSheet.create({
     }
 });
 
-const Aa = () => {
-    return (
-    <View style={{flex: 1, backgroundColor: 'blue'}}>
-        <Text>aaaaaaaaa</Text>
-    </View>
-    )
-}
-
 const DiscoverTabNavigator = () => {
     const [route, setRoute] = useState("Popular");
 

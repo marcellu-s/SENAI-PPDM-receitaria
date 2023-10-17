@@ -3,8 +3,10 @@ import { View, Text } from 'react-native';
 
 import RecipeScreen from '../../../views/Recipe';
 import DiscoverTabNavigator from '../../TabNavigator/discover';
+import HomeScreen from '../../../views/Home';
 // import RecipesDisplay from '../../../components/RecipesDisplay';
 import RecipesDisplay from '../../../components/RecipesDisplay';
+import { useState } from 'react';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,14 +19,16 @@ export const Aa = () => {
     )
 }
 
-const RecipeStack = () => {
+const HomeStack = () => {
+
+    const [route, setRoute] = useState("Home")
 
     return (
-        <Stack.Navigator initialRouteName="Kk" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Kk" component={RecipesDisplay} />
-            <Stack.Screen name="Recipe" component={RecipeScreen} />
+        <Stack.Navigator initialRouteName={route} screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Recipe" route={route} useRoute={setRoute} component={RecipeScreen} />
         </Stack.Navigator>
     );
 };
 
-export default RecipeStack;
+export default HomeStack;

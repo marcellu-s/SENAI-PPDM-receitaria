@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -74,13 +74,6 @@ const styles = StyleSheet.create({
     }
 });
 
-const Aa = () => {
-    return (
-    <View style={{flex: 1, backgroundColor: 'blue'}}>
-        <Text>aaaaaaaaa</Text>
-    </View>
-    )
-}
 
 const TabNavigator = () => {
     const [route, setRoute] = useState("MyHome");

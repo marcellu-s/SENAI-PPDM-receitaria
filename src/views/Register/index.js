@@ -2,8 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { useState } from 'react';
-import logo from '../../assets/images/logo.png';
+import { registerCall } from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
+
+import logo from '../../assets/images/logo.png';
 
 export default function RegisterScreen() {
 
@@ -11,6 +13,8 @@ export default function RegisterScreen() {
 
     const [ hidePass, setHidePass ] = useState(true);
     const [ hideConfirmPass, setHideConfirmPass ] = useState(true);
+    const [ name, setName ] = useState('');
+    const [ lastName, setLastName ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ confirmPassword, setConfirmPassword ] = useState('');
@@ -26,8 +30,8 @@ export default function RegisterScreen() {
                     </View>
                     <View>
                         <View style={{flexDirection: 'row', gap: 16, marginTop: 32}}>
-                            <TextInput style={styles.inputSearchDouble} placeholder="Nome" value={email} autoCapitalize='none' keyboardType='email-address' placeholderTextColor={'#fff'} onChangeText={(value) => setEmail(value)} />
-                            <TextInput style={styles.inputSearchDouble} placeholder="Sobrenome" value={email} autoCapitalize='none' keyboardType='email-address' placeholderTextColor={'#fff'} onChangeText={(value) => setEmail(value)} />
+                            <TextInput style={styles.inputSearchDouble} placeholder="Nome" value={name} autoCapitalize='none' keyboardType='default' placeholderTextColor={'#fff'} onChangeText={(value) => setName(value)} />
+                            <TextInput style={styles.inputSearchDouble} placeholder="Sobrenome" value={lastName} autoCapitalize='none' keyboardType='default' placeholderTextColor={'#fff'} onChangeText={(value) => setLastName(value)} />
                         </View>
                         <View style={styles.inputSearch}>
                             <TextInput style={styles.input} placeholder="E-mail" value={email} autoCapitalize='none' keyboardType='email-address' placeholderTextColor={'#fff'} onChangeText={(value) => setEmail(value)} />
@@ -50,7 +54,29 @@ export default function RegisterScreen() {
                         </View>
                     </View>
                     <View style={{marginTop: 32}}>
-                        <TouchableOpacity style={styles.btn}>
+                        <TouchableOpacity style={styles.btn} onPress={async () => {
+
+                            if (password != confirmPassword) {
+
+                                alert("As senhas não conferem!");
+                                return;
+                            }
+
+                            const isSuccess = await registerCall({
+                                name, lastName, email, password
+                            });
+
+                            if (isSuccess.status === true) {
+
+                                alert(isSuccess.msg);
+                                navigation.navigate('Login');
+                            } else {
+    
+                                alert(isSuccess.msg);
+                                return;
+                            }
+
+                        }}>
                             <Text style={{textAlign: 'center', fontFamily: 'Poppins-Bold', fontSize: 20, color: '#fff'}}>CADASTRAR</Text>
                         </TouchableOpacity>
                     </View>
@@ -63,9 +89,13 @@ export default function RegisterScreen() {
                     </View>
                     <View style={{marginTop: 32}}>
                         <TouchableOpacity onPress={() => {
+                            setName('');
+                            setLastName('');
                             setEmail('');
-                            // setPassword('');
-                            // setHidePass(true);
+                            setPassword('');
+                            setConfirmPassword('');
+                            setHidePass(true);
+                            setHideConfirmPass(true);
                     
                             navigation.navigate('Login')
                         }}>

@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
 
-        width: Dimensions.get('window').width - 64,
+        width: Dimensions.get('window').width - 40,
         position: 'absolute',
         bottom: 16,
         alignSelf: 'center',

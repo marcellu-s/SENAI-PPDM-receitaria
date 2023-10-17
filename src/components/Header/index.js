@@ -23,19 +23,6 @@ const HeaderApp = () => {
                     <AntDesign name="search1" size={24} color="white" />
                 </TouchableOpacity>
             </View>
-
-            <View style={styles.categoriesWrapper}>
-                <TouchableOpacity>
-                    <Text style={styles.categorieDestac}>Popular</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={styles.categorie}>Novas receitas</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text style={styles.categorie}>Todas</Text>
-                </TouchableOpacity>
-            </View>
-
         </View>
     );
 };
@@ -82,37 +69,6 @@ const styles = StyleSheet.create({
         right: 16,
         top: 10,
     },
-
-    categoriesWrapper: {
-        marginTop: 32,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-
-    categorieDestac: {
-        backgroundColor: '#FE8A07',
-        color: '#fff',
-        fontFamily: 'Poppins-Bold',
-        paddingHorizontal: 16,
-        paddingVertical: 6,
-        borderRadius: 8,
-        textAlign: 'center',
-        verticalAlign: 'middle',
-    },  
-
-    categorie: {
-        backgroundColor: '#fff',
-        color: '#333',
-        fontFamily: 'Poppins-Regular',
-        paddingHorizontal: 16,
-        paddingVertical: 6,
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: '#999',
-        textAlign: 'center',
-        verticalAlign: 'middle',
-    }
 });
 
 export default HeaderApp;

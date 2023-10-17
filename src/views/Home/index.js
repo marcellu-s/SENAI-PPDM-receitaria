@@ -1,8 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
 
-import HeaderApp from '../../components/Header';
+import DiscoverTabNavigator from '../../routes/TabNavigator/discover';
+import RecipeStack from '../../routes/StackNavigator/recipe';
 import RecipesDisplay from '../../components/RecipesDisplay';
+
+import HeaderApp from '../../components/Header';
 import Navbar from '../../components/Navbar';
 
 // Tela principal do APP
@@ -14,7 +17,10 @@ const HomeScreen = () => {
                 <SafeAreaView style={styles.homeScreenContainer}>
                     <StatusBar style="auto" />
                     <HeaderApp />
+                    <DiscoverTabNavigator />
+
                     <RecipesDisplay />
+                    {/* <RecipeStack /> */}
                 </SafeAreaView>
             </ScrollView>
             <Navbar />

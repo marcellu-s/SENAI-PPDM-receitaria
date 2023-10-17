@@ -1,30 +1,32 @@
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
-import { Feather  } from '@expo/vector-icons';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 
 const Recipe = ({ props }) => {
 
     const navigation = useNavigation();
 
+    const stars = props.stars;
+
     return (
-        <Pressable onPress={() => navigation.navigate('Recipe', props)}>
+        <TouchableOpacity onPress={() => navigation.navigate('Recipe', props)}>
             <View style={styles.recipe}>
                 <Text style={styles.recipeTitle}>{props.title}</Text>
 
                 <View style={styles.recipeStars}>
-                    <Feather name="star" size={12} color="#FFCF5C" />
-                    <Feather name="star" size={12} color="#FFCF5C" />
-                    <Feather name="star" size={12} color="#FFCF5C" />
-                    <Feather name="star" size={12} color="#FFCF5C" />
-                    <Feather name="star" size={12} color="#FFCF5C" />
-                    <Text>4.5</Text>
+                    <Icon name={ stars > 0 ? "star" : "star-outline"} size={12} color="#FFCF5C" />
+                    <Icon name={ stars > 1 ? "star" : "star-outline"} size={12} color="#FFCF5C" />
+                    <Icon name={ stars > 2 ? "star" : "star-outline"} size={12} color="#FFCF5C" />
+                    <Icon name={ stars > 3 ? "star" : "star-outline"} size={12} color="#FFCF5C" />
+                    <Icon name={ stars > 4 ? "star" : "star-outline"} size={12} color="#FFCF5C" />
+                    <Text>{stars.toFixed(1)}</Text>
                 </View>
                 
                 <Text style={styles.recipeAbout}>{props.about}</Text>
 
                 <Image source={{uri: props.image}} style={styles.recipeImage} />
             </View>
-        </Pressable>
+        </TouchableOpacity>
     );
 };
 

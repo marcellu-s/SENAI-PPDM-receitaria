@@ -1,8 +1,11 @@
-import Routes from './src/routes';
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './src/routes/StackNavigator/main';
 
 export default function App() {
 
     return (
-        <Routes />
+        <NavigationContainer>      
+            <Routes />
+        </NavigationContainer>
     );
 }

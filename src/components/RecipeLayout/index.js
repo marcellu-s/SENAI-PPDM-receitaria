@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { Ionicons, AntDesign, FontAwesome, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { Ionicons, AntDesign, FontAwesome, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
 
 const RecipeLayout = () => {
 
     const navigation = useNavigation();
 
     const recipe = useRoute().params;
+
+    const [fav, setFav] = useState(false);
+    const [stars, setStars] = useState(false);
     
     return (
         <View>
@@ -16,17 +22,21 @@ const RecipeLayout = () => {
                         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                             <Ionicons name="arrow-back-circle-outline" size={32} color="black" />   
                         </TouchableOpacity>
-                    <TouchableOpacity>
-                        <AntDesign name="hearto" size={28} color="#FE8A07" />
+                    <TouchableOpacity onPress={() => fav ? setFav(false) : setFav(true)}>
+                        <AntDesign name={ fav ? "heart" : "hearto"} size={28} color="#FE8A07" />
                     </TouchableOpacity>
                 </View>
-                <Text style={{fontSize: 32, fontFamily: 'Poppins-Bold', textAlign: 'center', marginTop: 21}}>{recipe.title}</Text>
+                <TouchableOpacity>
+                    <Text style={{fontSize: 32, fontFamily: 'Poppins-Bold', textAlign: 'center', marginTop: 21}}>{recipe.title}</Text>
+                </TouchableOpacity>
                 <View style={styles.imageContainer}>
                     <Image source={{uri: recipe.image}} style={styles.image} resizeMode="cover" />
                 </View>
                 
                 <View style={styles.user}>
-                    <FontAwesome style={styles.userby} name="user-circle-o" size={32} color="#717171" />
+                    <TouchableOpacity>
+                        <FontAwesome style={styles.userby} name="user-circle-o" size={32} color="#717171" />
+                    </TouchableOpacity>
                     <Text style={styles.usertext}>Por: {recipe.author}</Text>
                 </View>
                 <View style={styles.recipedetails}>
@@ -63,7 +73,9 @@ const RecipeLayout = () => {
             </View>
             <View style={styles.main}>
                 <View style={styles.ingredients}>
-                    <Text style={styles.title}>Ingredientes</Text>
+                    <TouchableOpacity>
+                        <Text style={styles.title}>Ingredientes</Text>
+                    </TouchableOpacity>
                     <View style={styles.ingredientsList}>
 
                         {
@@ -79,7 +91,9 @@ const RecipeLayout = () => {
                     </View>
                 </View>
                 <View style={styles.prepare}>
-                    <Text style={styles.title}>Modo de Preparo</Text>
+                    <TouchableOpacity>
+                        <Text style={styles.title}>Modo de Preparo</Text>
+                    </TouchableOpacity>
                     <View style={{gap: 24, marginBottom: 32}}>
 
                         {
@@ -95,17 +109,31 @@ const RecipeLayout = () => {
                     </View>
                 </View>
                 <View style={{marginVertical: 32, backgroundColor: '#333', padding: 16, borderRadius: 16}}>
-                    <Text style={{textAlign: 'center', marginBottom: 16, fontFamily: 'Poppins-Bold', fontSize: 24, color: '#FE8A07'}}>Avalie essa receita!</Text>
+                    <TouchableOpacity>
+                        <Text style={{textAlign: 'center', marginBottom: 16, fontFamily: 'Poppins-Bold', fontSize: 24, color: '#FE8A07'}}>Avalie essa receita!</Text>
+                    </TouchableOpacity>
                     <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 8}}>
-                        <Feather name="star" size={24} color="#FFCF5C" />
-                        <Feather name="star" size={24} color="#FFCF5C" />
-                        <Feather name="star" size={24} color="#FFCF5C" />
-                        <Feather name="star" size={24} color="#FFCF5C" />
-                        <Feather name="star" size={24} color="#FFCF5C" />
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 1 ? setStars(1) : setStars(false) }>
+                            <Icon name={stars >= 1 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 2 ? setStars(2) : setStars(false) }>
+                            <Icon name={stars >= 2 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 3 ? setStars(3) : setStars(false) }>
+                            <Icon name={stars >= 3 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 4 ? setStars(4) : setStars(false) }>
+                            <Icon name={stars >= 4 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 5 ? setStars(5) : setStars(false) }>
+                            <Icon name={stars >= 5 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{borderWidth: 1, borderColor: '#999', padding: 32, borderRadius: 16, marginBottom: 32}}>
-                    <Text style={{fontFamily: 'Poppins-Bold', fontSize: 24, color:'#333', marginBottom: 16, textAlign: 'center',}}>Informações adicionais</Text>
+                    <TouchableOpacity>
+                        <Text style={{fontFamily: 'Poppins-Bold', fontSize: 24, color:'#333', marginBottom: 16, textAlign: 'center',}}>Informações adicionais</Text>
+                    </TouchableOpacity>
                     <Text style={{fontFamily: 'Poppins-Light', fontSize: 16, color:'#333', marginBottom: 32, textAlign: 'center',}}>Dicas para fazer uma receita de {recipe.title}</Text>
                     <Text style={{fontFamily: 'Poppins-Regular', fontSize: 16, color:'#333', textAlign: 'justify', }}>
                         {recipe.additionalInformation}

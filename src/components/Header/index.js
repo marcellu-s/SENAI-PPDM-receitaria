@@ -7,11 +7,11 @@ const HeaderApp = () => {
         <View style={styles.headerContainer}>
             <View style={styles.header}>
                 <TouchableOpacity>
-                    <Feather name="menu" size={32} color="#333" />
+                    <Ionicons name="person-circle-outline" size={32} color="black" />
                 </TouchableOpacity>
                 <Text style={styles.title}>Bem-vindo</Text>
                 <TouchableOpacity>
-                    <Ionicons name="person-circle" size={32} color="#333" />
+                    <Ionicons name="md-exit-outline" size={32} color="black" />
                 </TouchableOpacity>
             </View>
 

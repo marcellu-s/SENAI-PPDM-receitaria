@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { Ionicons, Feather, AntDesign  } from '@expo/vector-icons';
+import { Ionicons, AntDesign  } from '@expo/vector-icons';
 
 const HeaderApp = () => {
 

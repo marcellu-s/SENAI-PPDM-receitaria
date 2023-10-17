@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
 
 import DiscoverTabNavigator from '../../routes/TabNavigator/discover';
-import RecipeStack from '../../routes/StackNavigator/recipe';
 import RecipesDisplay from '../../components/RecipesDisplay';
 
 import HeaderApp from '../../components/Header';

@@ -43,7 +43,7 @@ export default function LoginScreen() {
 
                         if (isSuccess.status === true) {
 
-                            navigation.navigate('Home');
+                            navigation.navigate('Main');
                         } else {
 
                             alert(isSuccess.msg);

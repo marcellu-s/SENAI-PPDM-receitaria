@@ -1,17 +1,22 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { Ionicons, Feather, AntDesign  } from '@expo/vector-icons';
+import { Ionicons, AntDesign  } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+import { showConfirmLogoutDialog } from '../Confirm';
 
 const HeaderApp = () => {
+
+    const navigation = useNavigation();
 
     return (
         <View style={styles.headerContainer}>
             <View style={styles.header}>
                 <TouchableOpacity>
-                    <Feather name="menu" size={32} color="#333" />
+                    <Ionicons name="md-person-circle-outline" size={32} color="black" />
                 </TouchableOpacity>
                 <Text style={styles.title}>Bem-vindo</Text>
-                <TouchableOpacity>
-                    <Ionicons name="person-circle" size={32} color="#333" />
+                <TouchableOpacity onPress={() => showConfirmLogoutDialog(navigation)}>
+                    <Ionicons name="exit-outline" size={32} color="black" />
                 </TouchableOpacity>
             </View>
 
@@ -26,13 +31,13 @@ const HeaderApp = () => {
 
             <View style={styles.categoriesWrapper}>
                 <TouchableOpacity>
-                    <Text style={styles.categorieDestac}>Popular</Text>
+                    <Text style={styles.categorieDestac}>Todas</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Text style={styles.categorie}>Novas receitas</Text>
+                    <Text style={styles.categorie}>Recentes</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Text style={styles.categorie}>Todas</Text>
+                    <Text style={styles.categorie}>Popular</Text>
                 </TouchableOpacity>
             </View>
 

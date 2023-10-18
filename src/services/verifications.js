@@ -1,5 +1,7 @@
 // Funções de validações
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 // Verificar o email
 export function verifyEmail(email) {
 
@@ -17,6 +19,24 @@ export function verifyEmail(email) {
 
         return {
             status: false,
+        };
+    }
+}
+
+export async function getToken() {
+
+    const token = await AsyncStorage.getItem('token');
+
+    if (token.length > 0) {
+
+        return {
+            status: true,
+            token: token
+        };
+    } else {
+
+        return {
+            status: false
         };
     }
 }

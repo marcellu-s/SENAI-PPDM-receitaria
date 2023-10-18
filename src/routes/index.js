@@ -6,6 +6,7 @@ import HomeScreen from '../views/Home';
 import RecipeScreen from '../views/Recipe';
 import LoginScreen from '../views/Login';
 import RegisterScreen from '../views/Register';
+import ProfileScreen from '../views/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ const Routes = () => {
                 <Stack.Screen name="Register" component={RegisterScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Recipe" component={RecipeScreen} />
+                <Stack.Screen name="Profile" component={ProfileScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

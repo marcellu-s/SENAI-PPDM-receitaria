@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, Scrol
 import { Feather } from '@expo/vector-icons';
 
 
-const Profile = () => {
+export default function ProfileScreen() {
 
 
     const [ nome, setNome ] = useState('');
@@ -19,7 +19,6 @@ const Profile = () => {
 
     }
 
-
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{ padding: 20 }}>
@@ -29,7 +28,9 @@ const Profile = () => {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TouchableOpacity style={{ fontSize: 18, fontWeight: 'bold', textAlign:'right', paddingTop: 20 }}>Salvar</TouchableOpacity>
+                    <TouchableOpacity style={{ fontSize: 18, fontWeight: 'bold', textAlign:'right', paddingTop: 20 }}>
+                        <Text>Salvar</Text>
+                    </TouchableOpacity>
                 </View>
                 <View>
                     <Text style={{ fontSize: 32, fontWeight: 'bold', textAlign:'center', paddingTop: 100 }}>Meu perfil</Text>
@@ -110,5 +111,3 @@ const styles = StyleSheet.create({
     }
 
 });
-
-export default Profile;

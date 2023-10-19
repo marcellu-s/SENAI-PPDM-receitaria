@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView, } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+// import ProfileScreen from './index';
 
 
 export default function ProfileScreen() {
+
+    const navigation = useNavigation();
 
 
     const [nome, setNome] = useState('');
@@ -22,20 +26,21 @@ export default function ProfileScreen() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{ padding: 20 }}>
-                <View>
-                    <TouchableOpacity style={{ fontSize: 18, fontWeight: 'bold', paddingTop: 20 }}>
-                        <Feather name="arrow-left-circle" size={34} color="black" />
+                <View style={{flexDirection:'row', justifyContent: 'space-between', marginTop: 30, paddingHorizontal: 3}}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                        <Feather name="arrow-left-circle" size={32} color="black" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{  }}>
+                        <Text style={{ fontSize: 18, fontWeight: 600}}>Salvar</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TouchableOpacity style={{ fontSize: 18, fontWeight: 'bold', paddingTop: 20 }}>
-                        <Text>Salvar</Text>
-                    </TouchableOpacity>
+                    <Text style={{ fontSize: 32, fontWeight: 'bold', textAlign: 'center', paddingTop: 50 }}>Meu Perfil</Text>
                 </View>
-                <View>
-                    <Text style={{ fontSize: 32, fontWeight: 'bold', textAlign: 'center', paddingTop: 100 }}>Meu perfil</Text>
-                </View>
-                <View style={{ marginTop: 20 }}>
+                <View style={{ marginTop: 40 }}>
+                    {/* <Image source={require('./src/assets/images/transferir.png')}/> */}
+                    <Image source={{uri:'https://i.pinimg.com/564x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg'}}/>
+                    
                     <Text style={styles.subtitle}>Imagem do perfil</Text>
                 </View>
                 <View style={styles.inputWrapperDouble}>
@@ -70,12 +75,12 @@ const styles = StyleSheet.create({
     },
 
     inputWrapper: {
-        marginTop: 55,
+        marginTop: 20,
         gap: 12
     },
 
     inputContainer: {
-        gap: 6,
+        gap: 4,
 
     },
 
@@ -87,31 +92,29 @@ const styles = StyleSheet.create({
     },
 
     input: {
-
+        marginTop: 100,
         borderWidth: 1,
         borderColor: '#000',
         backgroundColor: '#242A37',
         borderRadius: 8,
         paddingHorizontal: 12,
         paddingVertical: 6,
-
-
-
-
+        color: '#ffff',
+        width: '45%',
 
     },
 
     input2: {
 
+        marginTop: 20,
         borderWidth: 1,
         borderColor: '#000',
         backgroundColor: '#242A37',
         borderRadius: 8,
         paddingHorizontal: 12,
         paddingVertical: 6,
-        marginRight: 200,
-        width: '100%'
-
+        width: '100%',
+        color: '#ffff',
 
     },
 

@@ -1,6 +1,5 @@
 import { Alert } from "react-native";
 import { Logout } from "../../services/logout";
-import { useNavigation } from "@react-navigation/native";
 
 export const showConfirmLogoutDialog = (navigation) => {
 

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign, Feather } from '@expo/vector-icons';
-import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,11 +9,23 @@ import logo from '../../assets/images/logo.png';
 
 export default function LoginScreen() {
 
+    const [ inLoad, setInload ] = useState(false);
+
     const navigation = useNavigation();
 
     const [ hidePass, setHidePass ] = useState(true);
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+
+    if (inLoad) {
+
+        return(
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#FE8A07" />
+                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16 }}>ENTRANDO...</Text>
+            </View>
+        );
+    }
 
     return(
         <SafeAreaView style={styles.homeScreenContainer}>
@@ -39,12 +51,22 @@ export default function LoginScreen() {
                 <View style={{marginTop: 32}}>
                     <TouchableOpacity style={styles.btn} onPress={async () => {
 
+                        setInload(true);
+
                         const isSuccess = await loginCall(email, password);
 
                         if (isSuccess.status === true) {
-
+                            
+                            setEmail('');
+                            setPassword('');
+                            setHidePass(true)
+                            setInload(false);
+                            
                             navigation.navigate('Home');
+
                         } else {
+
+                            setInload(false);
 
                             alert(isSuccess.msg);
                         }

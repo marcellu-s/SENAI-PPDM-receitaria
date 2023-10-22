@@ -40,14 +40,6 @@ export async function loginCall(email, password) {
             body: JSON.stringify(payload)
         });
 
-        if (!response.ok) {
-
-            return {
-                status: false,
-                msg: "Opa, um erro aconteceu, mas não foi sua culpa, tente novamente"
-            };
-        }
-
         // Recebendo a responsta
         const data = await response.json();
 
@@ -63,11 +55,13 @@ export async function loginCall(email, password) {
         // Guardando o Token para futuras requisições
         await AsyncStorage.setItem('token', data.token);
 
-        if ((await AsyncStorage.getItem('token')) != "") {
+        if ((await AsyncStorage.getItem('token'))) {
 
             return {
                 status: true,
-                msg: "Log In efetuado com sucesso!"
+                msg: "Log In efetuado com sucesso!",
+                name: data.name,
+                email: data.email
             }
         }
 

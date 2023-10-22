@@ -3,8 +3,12 @@ import { Ionicons, AntDesign  } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import { showConfirmLogoutDialog } from '../Confirm';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 const HeaderApp = () => {
+
+    const { userData } = useContext(UserContext);
 
     const navigation = useNavigation();
 
@@ -12,7 +16,7 @@ const HeaderApp = () => {
         <View style={styles.headerContainer}>
             <View style={styles.header}>
 
-                <Text style={styles.title}>Bem vindo</Text>
+                <Text style={styles.title}>Bem vindo(a){userData.name ? `, ${userData.name}` : ''}</Text>
                 <TouchableOpacity onPress={() => showConfirmLogoutDialog(navigation)}>
                     <Ionicons name="exit-outline" size={32} color="black" />
                 </TouchableOpacity>

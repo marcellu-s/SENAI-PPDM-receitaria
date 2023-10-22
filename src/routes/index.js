@@ -7,6 +7,7 @@ import LoginScreen from '../views/Login';
 import RegisterScreen from '../views/Register';
 
 import TabNavigator from './TabNavigator';
+import { UserProvider } from '../contexts/UserContext';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,14 +24,16 @@ const Routes = () => {
     }
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Register" component={RegisterScreen} />
-                <Stack.Screen name="Home" component={TabNavigator} />
-                <Stack.Screen name="Recipe" component={RecipeScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <UserProvider>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                    <Stack.Screen name="Register" component={RegisterScreen} />
+                    <Stack.Screen name="Home" component={TabNavigator} />
+                    <Stack.Screen name="Recipe" component={RecipeScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </UserProvider>
     );
 };
 

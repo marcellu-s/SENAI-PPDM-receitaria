@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
 
 import RecipeLayout from '../../components/RecipeLayout';
-import Navbar from '../../components/Navbar';
 
 // Tela receitas do APP
 const RecipeScreen = () => {
@@ -15,7 +14,6 @@ const RecipeScreen = () => {
                     <RecipeLayout />
                 </SafeAreaView>
             </ScrollView>
-            {/* <Navbar /> */}
         </View>
     );
 }

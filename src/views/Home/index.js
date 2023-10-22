@@ -3,7 +3,6 @@ import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
 
 import HeaderApp from '../../components/Header';
 import RecipesDisplay from '../../components/RecipesDisplay';
-import Navbar from '../../components/Navbar';
 
 // Tela principal do APP
 const HomeScreen = () => {
@@ -17,7 +16,6 @@ const HomeScreen = () => {
                     <RecipesDisplay />
                 </SafeAreaView>
             </ScrollView>
-            {/* <Navbar /> */}
         </View>
     );
 

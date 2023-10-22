@@ -17,7 +17,7 @@ const HomeScreen = () => {
                     <RecipesDisplay />
                 </SafeAreaView>
             </ScrollView>
-            <Navbar />
+            {/* <Navbar /> */}
         </View>
     );
 

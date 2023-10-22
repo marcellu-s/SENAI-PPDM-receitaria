@@ -15,7 +15,7 @@ const RecipeScreen = () => {
                     <RecipeLayout />
                 </SafeAreaView>
             </ScrollView>
-            <Navbar />
+            {/* <Navbar /> */}
         </View>
     );
 }

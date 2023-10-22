@@ -11,10 +11,8 @@ const HeaderApp = () => {
     return (
         <View style={styles.headerContainer}>
             <View style={styles.header}>
-                <TouchableOpacity>
-                    <Ionicons name="md-person-circle-outline" size={32} color="black" />
-                </TouchableOpacity>
-                <Text style={styles.title}>Bem-vindo</Text>
+
+                <Text style={styles.title}>Bem vindo</Text>
                 <TouchableOpacity onPress={() => showConfirmLogoutDialog(navigation)}>
                     <Ionicons name="exit-outline" size={32} color="black" />
                 </TouchableOpacity>

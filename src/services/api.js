@@ -40,6 +40,14 @@ export async function loginCall(email, password) {
             body: JSON.stringify(payload)
         });
 
+        if (!response.ok) {
+
+            return {
+                status: false,
+                msg: "Opa, um erro aconteceu, mas não foi sua culpa, tente novamente"
+            };
+        }
+
         // Recebendo a responsta
         const data = await response.json();
 
@@ -69,6 +77,8 @@ export async function loginCall(email, password) {
         };
 
     } catch(err) {
+
+        console.log(err);
 
         return {
             status: false,

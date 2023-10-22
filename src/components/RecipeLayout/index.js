@@ -13,7 +13,7 @@ const RecipeLayout = () => {
         <View>
             <View>
                 <View style={styles.navbar}> 
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
                             <Ionicons name="arrow-back-circle-outline" size={32} color="black" />   
                         </TouchableOpacity>
                     <TouchableOpacity>

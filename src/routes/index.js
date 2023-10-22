@@ -2,11 +2,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 
-import HomeScreen from '../views/Home';
 import RecipeScreen from '../views/Recipe';
 import LoginScreen from '../views/Login';
 import RegisterScreen from '../views/Register';
-import ProfileScreen from '../views/Profile';
+
+import TabNavigator from './TabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,12 +24,11 @@ const Routes = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='Profile' screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName='Login' screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Register" component={RegisterScreen} />
-                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Home" component={TabNavigator} />
                 <Stack.Screen name="Recipe" component={RecipeScreen} />
-                <Stack.Screen name="Profile" component={ProfileScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

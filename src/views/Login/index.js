@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { loginCall } from '../../services/api';
+import { getToken } from '../../services/verifications';
 import logo from '../../assets/images/logo.png';
 
 export default function LoginScreen() {
@@ -16,6 +17,22 @@ export default function LoginScreen() {
     const [ hidePass, setHidePass ] = useState(true);
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+
+    useEffect(() => {
+
+        console.log('rende');
+
+        async function verifyToken () {
+
+            if ((await getToken()).status === true) {
+
+                navigation.navigate('Home')
+            } 
+        }; 
+
+        verifyToken();
+
+    }, []);
 
     if (inLoad) {
 

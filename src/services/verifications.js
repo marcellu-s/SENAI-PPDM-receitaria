@@ -27,7 +27,7 @@ export async function getToken() {
 
     const token = await AsyncStorage.getItem('token');
 
-    if (token.length > 0) {
+    if (token && token.length > 0) {
 
         return {
             status: true,

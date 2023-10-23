@@ -16,6 +16,7 @@ export default function ProfileScreen() {
     const [senha, setSenha] = useState('');
 
     function editar() {
+
         if (onPress = true) {
             alert('Dados alterados com sucesso!')
             return;
@@ -27,21 +28,19 @@ export default function ProfileScreen() {
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{ padding: 20 }}>
                 <View style={{flexDirection:'row', justifyContent: 'space-between', marginTop: 30, paddingHorizontal: 3}}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
                         <Feather name="arrow-left-circle" size={32} color="black" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{  }}>
-                        <Text style={{ fontSize: 18, fontWeight: 600}}>Salvar</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
+                        <Text style={{ fontSize: 17, fontFamily: 'Poppins-Bold', marginTop: 1}}>Salvar</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <Text style={{ fontSize: 32, fontWeight: 'bold', textAlign: 'center', paddingTop: 50 }}>Meu Perfil</Text>
+                    <Text style={{ fontSize: 32, fontFamily: 'Poppins-Bold', textAlign: 'center', marginTop: 40 }}>Meu Perfil</Text>
                 </View>
-                <View style={{ marginTop: 40 }}>
-                    {/* <Image source={require('./src/assets/images/transferir.png')}/> */}
-                    <Image source={{uri:'https://i.pinimg.com/564x/15/0f/a8/150fa8800b0a0d5633abc1d1c4db3d87.jpg'}}/>
-                    
-                    <Text style={styles.subtitle}>Imagem do perfil</Text>
+                <View style={{ marginTop: 10}}>
+                    <Image style={{width:100 , height:100 , borderRadius: 100/2, marginLeft: 135 }} source={require('../../assets/images/transferir.png')}/>
+                    <Text style={styles.subtitle}>Nome do perfil</Text>
                 </View>
                 <View style={styles.inputWrapperDouble}>
                     <TextInput value={nome} style={styles.input} onChangeText={(value) => setNome(value)} placeholderTextColor={'#ffff'} placeholder='Nome' />
@@ -57,7 +56,7 @@ export default function ProfileScreen() {
                 </View>
             <View style={{ marginVertical: 20, paddingVertical: 20 }}>
                 <TouchableOpacity style={styles.button} onPress={() => editar()}>
-                    <Text style={{ fontSize: 24, color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>EDITAR</Text>
+                    <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', fontFamily: 'Poppins-Bold' }}>EDITAR</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -69,9 +68,12 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
 
     subtitle: {
+        
+        marginTop: 15,
         fontSize: 24,
         fontWeight: '500',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Poppins-Light',
     },
 
     inputWrapper: {
@@ -92,7 +94,8 @@ const styles = StyleSheet.create({
     },
 
     input: {
-        marginTop: 100,
+        fontFamily: 'Poppins-Light',
+        marginTop: 70,
         borderWidth: 1,
         borderColor: '#000',
         backgroundColor: '#242A37',
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
     },
 
     input2: {
-
+        fontFamily: 'Poppins-Light',
         marginTop: 20,
         borderWidth: 1,
         borderColor: '#000',

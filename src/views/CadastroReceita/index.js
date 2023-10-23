@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
 
 import Add from "../../assets/images/Add.png";
@@ -238,6 +238,10 @@ export default function CadastroReceita() {
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        <TouchableOpacity style={{backgroundColor: 'red'}}>
+                            <Text>Hello</Text>
+                            <Entypo name="check" size={24} color="black" />
+                        </TouchableOpacity>
                     </View>
                 </SafeAreaView>
             </ScrollView>
@@ -309,7 +313,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         gap: 20,
     },
-    inputModo:{
+    inputModo: {
         height: 100,
         width: '100%',
         fontSize: 16,
@@ -318,7 +322,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         backgroundColor: '#242A37',
         flexWrap: 'wrap',
-        
+
     },
 
 });

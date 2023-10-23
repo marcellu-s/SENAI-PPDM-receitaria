@@ -8,6 +8,8 @@ import { getToken } from '../../services/verifications';
 
 import HomeScreen from '../../views/Home';
 import ProfileScreen from '../../views/Profile'
+import FavoritesScreen from '../../views/Favorites';
+import MyRecipesScreen from '../../views/MyRecipes';
 
 const Tab = createBottomTabNavigator();
 
@@ -86,10 +88,10 @@ const TabNavigator = () => {
     return (
         <Tab.Navigator initialRouteName={route} screenOptions={{ headerShown: false }} tabBar={(props) => <TabBar {...props} currentRoute={route} setRoute={setRoute} />}>
             <Tab.Screen name="MyHome" component={HomeScreen} />
-            <Tab.Screen name="Favorites" component={HomeScreen} />
+            <Tab.Screen name="Favorites" component={FavoritesScreen} />
             <Tab.Screen name="AddRecipe" component={HomeScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
-            <Tab.Screen name="MyRecipes" component={HomeScreen} />
+            <Tab.Screen name="MyRecipes" component={MyRecipesScreen} />
         </Tab.Navigator>
     );
 }

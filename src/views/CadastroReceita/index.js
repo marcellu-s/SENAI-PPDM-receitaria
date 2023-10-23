@@ -1,18 +1,98 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
+
 import Add from "../../assets/images/Add.png";
 import Remove from "../../assets/images/Remove.png";
-import btn from "../../assets/images/btn.png";
+
+import { useNavigation } from '@react-navigation/native';
+
+
 
 export default function CadastroReceita() {
-    const [dificuldade, setDificuldade] = useState('Selecione');
-    const [ingredientes, setingrdientes] = useState(['arroz', 'feijão']);
-    const [modoDePreparo, setModoDePreparo] = useState(['Leve ao forno', 'Humideça'])
-    const [categoria, setCategoria] = useState(['bolo', 'massas', 'sobremesa'])
 
-    function vetorIngredientes() {
+    const navigation = useNavigation();
+
+    const [dificuldade, setDificuldade] = useState('Selecione');
+    const [ingredientes, setIngredientes] = useState(['arroz']);
+    const [modoDePreparo, setModoDePreparo] = useState(['Leve ao forno', 'Humideça']);
+    const [categoria, setCategoria] = useState(['bolo', 'massas', 'sobremesa']);
+    const [inputTexto, setInputTexto] = useState('');
+    const [inputTextoModoDePreparo, setInputTextoModoDePreparo] = useState('');
+    const [inputTextoCategoria, setInputTextoCategoria] = useState('');
+
+    const handleTextChange = (texto, indexItem) => {
+        const newIngredientes = [...ingredientes]; // Cria uma cópia do array ingredientes
+        newIngredientes[indexItem] = texto; // Atualiza o elemento específico
+
+        setIngredientes(newIngredientes); // Define o novo estado
+    };
+    const addIngrediente = () => {
+        if (inputTexto != '') {
+            const newIngredientes = [...ingredientes];
+            newIngredientes.push(inputTexto);
+            setIngredientes(newIngredientes);
+            setInputTexto('');
+        }
+    }
+
+    const removeIngrediente = () => {
+        if (ingredientes.length > -1) {
+            const newIngredientes = [...ingredientes];
+            newIngredientes.pop();
+            setIngredientes(newIngredientes);
+
+        }
+
+    }
+    const handleTextChangeMododePreparo = (texto, indexItem) => {
+        const newModoDePreparo = [...modoDePreparo]; // Cria uma cópia do array modo de preparo
+        newModoDePreparo[indexItem] = texto; // Atualiza o elemento específico
+
+        setModoDePreparo(newModoDePreparo); // Define o novo estado
+    };
+    const addModoDePreparo = () => {
+        if (inputTextoModoDePreparo != '') {
+            const newModoDePreparo = [...modoDePreparo];
+            newModoDePreparo.push(inputTextoModoDePreparo);
+            setModoDePreparo(newModoDePreparo);
+            setInputTextoModoDePreparo('');
+        }
+    }
+
+    const removeModoDePreparo = () => {
+        if (modoDePreparo.length > -1) {
+            const newModoDePreparo = [...modoDePreparo];
+            newModoDePreparo.pop();
+            setModoDePreparo(newModoDePreparo);
+
+        }
+
+    }
+    const handleTextChangeCategoria = (texto, indexItem) => {
+        const newcategoria = [...categoria]; // Cria uma cópia do array modo de preparo
+        newcategoria[indexItem] = texto; // Atualiza o elemento específico
+
+        setCategoria(newcategoria); // Define o novo estado
+    };
+    const addCategoria = () => {
+        if (inputTextoCategoria != '') {
+            const newcategoria = [...categoria];
+            newcategoria.push(inputTextoCategoria);
+            setCategoria(newcategoria);
+            setInputTextoCategoria('');
+        }
+    }
+
+    const removeCategoria = () => {
+        if (categoria.length > -1) {
+            const newcategoria = [...categoria];
+            newcategoria.pop();
+            setCategoria(newcategoria);
+
+        }
 
     }
 
@@ -21,10 +101,10 @@ export default function CadastroReceita() {
             <ScrollView >
                 <SafeAreaView style={styles.homeScreenContainer}>
                     <StatusBar style="auto" />
-                    <TouchableOpacity style={{marginBottom: 50,}}>
-                        <Image style={{width: 50, height: 50,}} source={btn} alt="Botão de voltar" />
+                    <TouchableOpacity style={{ marginBottom: 50, }} onPress={() => navigation.navigate('MyHome')}>
+                        <Ionicons name="arrow-back-circle-outline" size={32} color="black" />
                     </TouchableOpacity>
-                    <View style={{ gap: 10,}}>
+                    <View style={{ gap: 10, }}>
                         <Text style={styles.textTitulo}>Titulo:</Text>
                         <TextInput
                             style={styles.input}
@@ -72,24 +152,31 @@ export default function CadastroReceita() {
                             {
                                 ingredientes.map((item, indexItem) => {
                                     return (
-                                        <View key={indexItem} style={{ flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: '#242A37', borderRadius: 10, padding: 10, }}>
-                                            <Text style={{ color: '#fff', fontSize: 20, }}>{indexItem} -</Text>
-                                            <TextInput style={{ color: '#fff', fontSize: 20, }} value={item} />
+                                        <View key={indexItem} style={styles.linha}>
+                                            <Text style={styles.txtInput}>{indexItem + 1} -</Text>
+                                            <TextInput style={styles.txtInput} multiline={true} value={ingredientes[indexItem]}
+                                                onChangeText={(texto) => handleTextChange(texto, indexItem)} />
                                         </View>
                                     )
                                 })
                             }
-                            <TextInput
-                                style={styles.input}
-                                placeholderTextColor="#fff"
-                                placeholder="Escreva aqui!!"
-                            />
-                            <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
-                                <TouchableOpacity>
-                                    <Image source={Add} alt="Botão de adicionar" />
+                            <View>
+                                <Text style={styles.txtInput}>{ingredientes.length + 1} -</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholderTextColor="#fff"
+                                    placeholder="Adicione aqui!!"
+                                    multiline={true}
+                                    value={inputTexto}
+                                    onChangeText={(texto) => setInputTexto(texto)}
+                                />
+                            </View>
+                            <View style={styles.btn}>
+                                <TouchableOpacity onPress={() => addIngrediente()}>
+                                    <AntDesign name="pluscircle" size={32} color="orange" />
                                 </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <Image source={Remove} alt="Botão de remover." />
+                                <TouchableOpacity onPress={() => removeIngrediente()}>
+                                    <AntDesign name="minuscircle" size={32} color="black" />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -98,52 +185,63 @@ export default function CadastroReceita() {
                             {
                                 modoDePreparo.map((item, indexItem) => {
                                     return (
-                                        <View key={indexItem} style={{ flexDirection: 'row', alignItems: 'center', gap: 5, backgroundColor: '#242A37', borderRadius: 10, padding: 10, }}>
-                                            <Text style={{ color: '#fff', fontSize: 20, }}>{indexItem} -</Text>
-                                            <TextInput style={{ color: '#fff', fontSize: 20, }} value={item} />
+                                        <View key={indexItem} style={styles.linha}>
+                                            <Text style={styles.txtInput}>{indexItem + 1} -</Text>
+                                            <TextInput style={styles.txtInput} multiline={true} value={modoDePreparo[indexItem]} onChangeText={(texto) => handleTextChangeMododePreparo(texto, indexItem)} />
                                         </View>
                                     )
                                 })
                             }
                             <TextInput
-                                style={styles.input}
+                                style={styles.inputModo}
                                 placeholderTextColor="#fff"
-                                placeholder="Ingrediente"
+                                placeholder="Adicione aqui!!"
+                                multiline={true}
+                                value={inputTextoModoDePreparo}
+                                onChangeText={(texto) => setInputTextoModoDePreparo(texto)}
                             />
-                            <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
-                                <TouchableOpacity>
-                                    <Image source={Add} alt="Botão de adiconar." />
+                            <View style={styles.btn}>
+                                <TouchableOpacity onPress={() => addModoDePreparo()}>
+                                    <AntDesign name="pluscircle" size={32} color="orange" />
                                 </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <Image source={Remove} alt="Botão de remover." />
+                                <TouchableOpacity onPress={() => removeModoDePreparo()}>
+                                    <AntDesign name="minuscircle" size={32} color="black" />
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{ gap: 8, }}>
+                        <View style={{ gap: 5, }} >
                             <Text style={styles.textTitulo}>Categoria:</Text>
-                            {
-                                categoria.map((item, indexItem) => {
-                                    return (
-                                        // <View key={indexItem} style={{ flexDirection: 'column', gap: 5,, borderRadius: 10,  }}>
-                                        <TextInput key={indexItem} style={{ color: '#fff', fontSize: 20, padding: 10, backgroundColor: '#242A37', width: 150, borderRadius: 10, }} value={item} onChangeValue={(item, index) => { console.log(item, "PARA COM ISSO", index) }} />
-                                        // </View>
-                                    )
-                                })
-                            }
+                            <View style={{ gap: 8, flexDirection: 'row', flexWrap: 'wrap', }}>
+
+                                {
+                                    categoria.map((item, indexItem) => {
+                                        return (
+
+                                            <TextInput style={{ color: '#fff', fontSize: 20, padding: 10, backgroundColor: '#242A37', width: 150, borderRadius: 10, }} multiline={true} value={categoria[indexItem]} onChangeText={(texto) => handleTextChangeCategoria(texto, indexItem)} />
+                                        )
+                                    })
+                                }
+                            </View>
                             <TextInput
                                 style={styles.input}
                                 placeholderTextColor="#fff"
-                                placeholder="Ingrediente"
+                                placeholder="Adicione Aqui!!"
+                                value={inputTextoCategoria}
+                                onChangeText={(texto) => setInputTextoCategoria(texto)}
                             />
                             <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
-                                <TouchableOpacity>
-                                    <Image source={Add} alt="Botão de adiconar." />
+                                <TouchableOpacity onPress={() => addCategoria()}>
+                                    <AntDesign name="pluscircle" size={32} color="orange" />
                                 </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <Image source={Remove} alt="Botão de remover." />
+                                <TouchableOpacity onPress={() => removeCategoria()}>
+                                    <AntDesign name="minuscircle" size={32} color="black" />
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        <TouchableOpacity style={{backgroundColor: 'red'}}>
+                            <Text>Hello</Text>
+                            <Entypo name="check" size={24} color="black" />
+                        </TouchableOpacity>
                     </View>
                 </SafeAreaView>
             </ScrollView>
@@ -170,6 +268,7 @@ const styles = StyleSheet.create({
         padding: 10,
         color: '#fff',
         backgroundColor: '#242A37',
+        flexWrap: 'wrap'
     },
     textTitulo2: {
         fontSize: 20,
@@ -195,4 +294,35 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15,
     },
+    linha: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
+        backgroundColor: '#242A37',
+        borderRadius: 10,
+        padding: 10,
+
+    },
+    txtInput: {
+        color: '#fff',
+        fontSize: 20,
+
+    },
+    btn: {
+        flexDirection: "row",
+        justifyContent: "center",
+        gap: 20,
+    },
+    inputModo: {
+        height: 100,
+        width: '100%',
+        fontSize: 16,
+        borderRadius: 10,
+        padding: 10,
+        color: '#fff',
+        backgroundColor: '#242A37',
+        flexWrap: 'wrap',
+
+    },
+
 });

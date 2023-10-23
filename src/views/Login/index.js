@@ -5,9 +5,10 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { loginCall } from '../../services/api';
-import { getToken } from '../../services/verifications';
+import { getToken, getUserDataInAsyncStorage } from '../../services/verifications';
 import logo from '../../assets/images/logo.png';
 import { UserContext } from '../../contexts/UserContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen() {
 
@@ -26,6 +27,8 @@ export default function LoginScreen() {
         async function verifyToken () {
 
             if ((await getToken()).status === true) {
+
+                let userData = await getUserDataInAsyncStorage();
 
                 navigation.navigate('Home')
             } 
@@ -80,6 +83,11 @@ export default function LoginScreen() {
                                 email: isSuccess.email,
                                 id: isSuccess.id
                             });
+
+                            await AsyncStorage.setItem('userData', JSON.stringify({
+                                name: isSuccess.name,
+                                id: isSuccess.id
+                            }));
                             
                             setEmail('');
                             setPassword('');

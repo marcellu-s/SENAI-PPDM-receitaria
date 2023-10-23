@@ -40,3 +40,22 @@ export async function getToken() {
         };
     }
 }
+
+export async function getUserDataInAsyncStorage() {
+
+    try {
+
+        const data = await AsyncStorage.getItem('userData');
+
+        if (data) {
+
+            return data;
+        }
+
+        return false;
+
+    } catch(err) {
+
+        return false;
+    }
+}

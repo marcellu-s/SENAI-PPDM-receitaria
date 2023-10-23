@@ -1,19 +1,42 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+import { getUserData } from '../../services/api';
+import { UserContext } from '../../contexts/UserContext';
 // import ProfileScreen from './index';
 
 
 export default function ProfileScreen() {
 
-    const navigation = useNavigation();
-
-
     const [nome, setNome] = useState('');
     const [sobrenome, setSobrenome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+
+    const { userData } = useContext(UserContext);
+
+
+    useEffect(() => {
+
+        async function getUser() {
+
+            const user = await getUserData(userData.id);
+
+            if (user.status === false) {
+
+                alert(user.msg);
+            }
+
+            console.log(user);
+        }
+
+        getUser();
+
+    }, []);
+
+    const navigation = useNavigation();
+
 
     function editar() {
 

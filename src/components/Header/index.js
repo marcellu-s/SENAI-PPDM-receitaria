@@ -1,9 +1,9 @@
+import { useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons, AntDesign  } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import { showConfirmLogoutDialog } from '../Confirm';
-import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 
 const HeaderApp = () => {

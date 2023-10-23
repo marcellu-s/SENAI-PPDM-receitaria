@@ -199,31 +199,42 @@ export async function getUserData(id) {
 
     try {
 
-        const token = await getToken();
+        const tokenData = await getToken();
 
-        if (token.status === false) {
+        if (tokenData.status === false) {
 
-            return false;
+            return {
+                status: false,
+                msg: 'Falha na autenticação, tente logar novamente!'
+            };
         }
 
         const response = await fetch(`${baseURL}/user/${id}`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`
-            } 
+                'Authorization': `Bearer ${tokenData.token}`,
+            },
         });
 
-        const data = response.json();
+        const data = await response.json();
 
-        console.log(data);
-        
+        if (data.status === 'success') {
+
+            return data;
+        } else {
+
+            return {
+                status: false,
+                msg: data.msg
+            }
+        }
     } catch(err) {
 
         console.log(err);
 
         return {
             status: false,
-            msg: "Opa, um erro aconteceu ao buscar seu perfil!"
+            msg: 'Falha na autenticação, tente logar novamente!'
         };
     }
 }

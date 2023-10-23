@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { Ionicons, AntDesign, FontAwesome, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { Ionicons, AntDesign, FontAwesome, Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const RecipeLayout = () => {
@@ -8,7 +8,7 @@ const RecipeLayout = () => {
     const navigation = useNavigation();
 
     const recipe = useRoute().params;
-    
+
     return (
         <View>
             <View>
@@ -67,7 +67,7 @@ const RecipeLayout = () => {
                     <View style={styles.ingredientsList}>
 
                         {
-                            recipe.ingredients.map((item, index) => {
+                            ((recipe.ingredients[0].replace(/\[|\]|\s/g, '').split(','))).map((item, index) => {
                                 return (
                                     <View style={styles.ingredientitem} key={index}>
                                         <Entypo name="check" size={20} color="black" />
@@ -83,10 +83,10 @@ const RecipeLayout = () => {
                     <View style={{gap: 24, marginBottom: 32}}>
 
                         {
-                            recipe.methodPreparation.map((item, index) => {
+                            ((recipe.methodPreparation[0].replace(/\[|\]|\s/g, '').split(','))).map((item, index) => {
                                 return(
                                     <View style={styles.prepareItem} key={index+1}>
-                                        <MaterialCommunityIcons name={`numeric-${index+1}-circle-outline`} size={24} color="black" />
+                                        <Text style={{color: '#333'}}>{index+1}</Text>
                                         <Text style={styles.text}>{item}</Text>
                                     </View>
                                 )
@@ -116,7 +116,7 @@ const RecipeLayout = () => {
                     <View style={styles.categoriesWrapper}> 
 
                         {
-                            recipe.categories.map((item, index) => {
+                            ((recipe.categories[0].replace(/\[|\]|\s/g, '').split(','))).map((item, index) => {
                                 return(
                                     <TouchableOpacity style={styles.categorie} key={index}>
                                         <Text style={styles.categorieText}>{item}</Text>
@@ -192,7 +192,8 @@ const styles = StyleSheet.create({
 
     textdetails:{
         fontSize:14,
-        fontFamily:'Poppins-Bold'
+        fontFamily:'Poppins-Bold',
+        textTransform: 'capitalize'
     },
 
     main:{
@@ -209,8 +210,7 @@ const styles = StyleSheet.create({
 
     prepare:{
         color:'#fff',
-        width:'100%',  
-        alignItems:'center', 
+          
         borderBottomWidth:0.5,
         borderBottomColor:'#717171',
         marginTop: 32,
@@ -243,11 +243,14 @@ const styles = StyleSheet.create({
         justifyContent:'flex-start',
         gap:16,
         alignItems:'center',
+        paddingRight: 24
     },
 
     prepareItem: {
-        flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: 16,
-        maxWidth: '100%'
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        gap: 16,
+        paddingRight: 24,
     }, 
 
     categoriesWrapper: {

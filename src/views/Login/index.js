@@ -77,7 +77,8 @@ export default function LoginScreen() {
 
                             setUser({
                                 name: isSuccess.name,
-                                email: isSuccess.email
+                                email: isSuccess.email,
+                                id: isSuccess.id
                             });
                             
                             setEmail('');

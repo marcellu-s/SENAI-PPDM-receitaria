@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { verifyEmail } from './verifications';
+import { getToken, verifyEmail } from './verifications';
 
 const baseURL = "https://receitaria-api.vercel.app";
 
@@ -61,7 +61,8 @@ export async function loginCall(email, password) {
                 status: true,
                 msg: "Log In efetuado com sucesso!",
                 name: data.name,
-                email: data.email
+                email: data.email,
+                id: data.id
             }
         }
 
@@ -81,6 +82,7 @@ export async function loginCall(email, password) {
     }
 }
 
+// Cadastrar-se no app
 export async function registerCall({ name, lastName, email, password }) {
 
     // Verificando se existem dados
@@ -151,6 +153,77 @@ export async function registerCall({ name, lastName, email, password }) {
         return {
             status: false,
             msg: "Opa, um erro aconteceu, mas não foi sua culpa, tente novamente"
+        };
+    }
+}
+
+// Exibir todas as receitas
+
+export async function getAllRecipes() {
+
+    try {
+
+        const response = await fetch(`${baseURL}/recipe/all`, {
+            method: 'GET'
+        });
+
+        const data = await response.json();
+
+        if (data.code === 200) {
+
+            return {
+                status: true,
+                recipes: data.recipes
+            };
+        } else {
+
+            return {
+                status: false,
+                msg: "Opa, um erro aconteceu ao carregar as receitas!"
+            };
+        }
+
+    } catch(err) {
+
+        console.log(err);
+
+        return {
+            status: false,
+            msg: "Opa, um erro aconteceu ao carregar as receitas!"
+        };
+    }
+}
+
+// Pegar os dados do usuário
+export async function getUserData(id) {
+
+    try {
+
+        const token = await getToken();
+
+        if (token.status === false) {
+
+            return false;
+        }
+
+        const response = await fetch(`${baseURL}/user/${id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            } 
+        });
+
+        const data = response.json();
+
+        console.log(data);
+        
+    } catch(err) {
+
+        console.log(err);
+
+        return {
+            status: false,
+            msg: "Opa, um erro aconteceu ao buscar seu perfil!"
         };
     }
 }

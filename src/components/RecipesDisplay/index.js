@@ -1,27 +1,77 @@
+import { useState, useCallback } from 'react';
 import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
-import receitas from '../../data';
+import { useFocusEffect } from '@react-navigation/native';
+
 import Recipe from '../Recipe';
+import { getAllRecipes } from '../../services/api';
 
 const RecipesDisplay = () => {
 
-    // let loader = true;
+    const [ loading, setLoading ] = useState(false);
+    const [ recipes, setRecipes ] = useState([]);
 
-    // if (loader) {
+    useFocusEffect(
 
-    //     return (
-    //         <View style={styles.spinnerContainer}>
-    //             <ActivityIndicator size="large" color="#FE8A07" />
-    //             <Text style={{fontSize: 12, fontFamily: 'Poppins-Bold'}}>CARREGANDO...</Text>
-    //         </View>
-    //     );
-    // }
+        useCallback(() => {
+
+            async function getRecipes() {
+
+                setLoading(true);
+    
+                const data = await getAllRecipes();
+    
+                if (data.status === true && data.recipes.length > 0) {
+    
+                    setRecipes(data.recipes);
+    
+                    setLoading(false);
+                } else {
+    
+                    if (data.status === false) {
+    
+                        alert(data.msg);
+                    }
+    
+                    setLoading(false);
+                }
+            }
+    
+            getRecipes();
+
+            return () => {
+                setRecipes([]);
+            }
+
+        }, [])
+    );
+
+
+    if (loading) {
+
+        return (
+            <View style={styles.feedbackContainer}>
+                <ActivityIndicator size="large" color="#FE8A07" />
+                <Text style={{fontSize: 12, fontFamily: 'Poppins-Bold'}}>CARREGANDO...</Text>
+            </View>
+        );
+    }
+
+    if (!recipes.length > 0) {
+
+        return (
+            <View style={styles.feedbackContainer}>
+                <Text style={{fontSize: 12, fontFamily: 'Poppins-Bold'}}>NENHUMA RECEITA ENCONTRADA!</Text>
+            </View>
+        );
+    }
+
 
     return (
         <View style={styles.recipeWrapper}>
             {
-                receitas.map((receita, index) => {
+                recipes.map((item, index) => {
                     return (
-                        <Recipe props={receita} key={index} />
+                        <Recipe props={item} key={`allRecipes-${index}`} />
                     )
                 })
             }
@@ -30,7 +80,7 @@ const RecipesDisplay = () => {
 };
 
 const styles = StyleSheet.create({
-    spinnerContainer: {
+    feedbackContainer: {
         marginVertical: 40,
         justifyContent: 'center',
         alignItems: 'center'

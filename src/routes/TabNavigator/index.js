@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 
 
 const TabNavigator = () => {
-    const [route, setRoute] = useState("MyHome");
+    const [route, setRoute] = useState("Profile");
 
     return (
         <Tab.Navigator initialRouteName={route} screenOptions={{ headerShown: false }} tabBar={(props) => <TabBar {...props} currentRoute={route} setRoute={setRoute} />}>

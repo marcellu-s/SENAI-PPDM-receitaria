@@ -4,6 +4,7 @@ import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, Image, Tou
 import { Picker } from "@react-native-picker/picker";
 import Add from "../../assets/images/Add.png";
 import Remove from "../../assets/images/Remove.png";
+import btn from "../../assets/images/btn.png";
 
 export default function CadastroReceita() {
     const [dificuldade, setDificuldade] = useState('Selecione');
@@ -20,7 +21,10 @@ export default function CadastroReceita() {
             <ScrollView >
                 <SafeAreaView style={styles.homeScreenContainer}>
                     <StatusBar style="auto" />
-                    <View style={{ gap: 10, }}>
+                    <TouchableOpacity style={{marginBottom: 50,}}>
+                        <Image style={{width: 50, height: 50,}} source={btn} alt="Botão de voltar" />
+                    </TouchableOpacity>
+                    <View style={{ gap: 10,}}>
                         <Text style={styles.textTitulo}>Titulo:</Text>
                         <TextInput
                             style={styles.input}
@@ -63,7 +67,7 @@ export default function CadastroReceita() {
 
                             </Picker>
                         </View>
-                        <View style={{gap: 10,}}>
+                        <View style={{ gap: 10, }}>
                             <Text style={styles.textTitulo}>Ingredientes:</Text>
                             {
                                 ingredientes.map((item, indexItem) => {
@@ -78,7 +82,7 @@ export default function CadastroReceita() {
                             <TextInput
                                 style={styles.input}
                                 placeholderTextColor="#fff"
-                                placeholder="Ingrediente"
+                                placeholder="Escreva aqui!!"
                             />
                             <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
                                 <TouchableOpacity>
@@ -89,7 +93,7 @@ export default function CadastroReceita() {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{gap: 10,}}>
+                        <View style={{ gap: 10, }}>
                             <Text style={styles.textTitulo}>Modo de Preparo:</Text>
                             {
                                 modoDePreparo.map((item, indexItem) => {
@@ -115,13 +119,13 @@ export default function CadastroReceita() {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{gap: 8,}}>
+                        <View style={{ gap: 8, }}>
                             <Text style={styles.textTitulo}>Categoria:</Text>
                             {
                                 categoria.map((item, indexItem) => {
                                     return (
                                         // <View key={indexItem} style={{ flexDirection: 'column', gap: 5,, borderRadius: 10,  }}>
-                                            <TextInput key={indexItem} style={{ color: '#fff', fontSize: 20, padding: 10,  backgroundColor: '#242A37', width: 150, borderRadius: 10,}} value={item} onChange={(item, index) => { console.log(item, "PARA COM ISSO", index)}}/>
+                                        <TextInput key={indexItem} style={{ color: '#fff', fontSize: 20, padding: 10, backgroundColor: '#242A37', width: 150, borderRadius: 10, }} value={item} onChangeValue={(item, index) => { console.log(item, "PARA COM ISSO", index) }} />
                                         // </View>
                                     )
                                 })

@@ -4,8 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { getUserData } from '../../services/api';
 import { UserContext } from '../../contexts/UserContext';
-// import ProfileScreen from './index';
-
 
 export default function ProfileScreen() {
 
@@ -16,18 +14,19 @@ export default function ProfileScreen() {
 
     const { userData } = useContext(UserContext);
 
-
     useEffect(() => {
 
         async function getUser() {
 
             const user = await getUserData(userData.id);
-
+            
             if (user.status === false) {
-
+                
                 alert(user.msg);
-            }
 
+                return;
+            }
+            
             console.log(user);
         }
 

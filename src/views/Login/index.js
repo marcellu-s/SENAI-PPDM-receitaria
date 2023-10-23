@@ -3,12 +3,12 @@ import { AntDesign, Feather } from '@expo/vector-icons';
 import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { useContext, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { loginCall } from '../../services/api';
 import { getToken, getUserDataInAsyncStorage } from '../../services/verifications';
-import logo from '../../assets/images/logo.png';
 import { UserContext } from '../../contexts/UserContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import logo from '../../assets/images/logo.png';
 
 export default function LoginScreen() {
 
@@ -24,11 +24,15 @@ export default function LoginScreen() {
 
     useEffect(() => {
 
+        // Verifica se o usuário já fez login anteriormente
         async function verifyToken () {
 
+            // Se sim, ele é redirecionado para a tela principal
             if ((await getToken()).status === true) {
 
                 let userData = await getUserDataInAsyncStorage();
+
+                setUser(JSON.parse(userData))
 
                 navigation.navigate('Home')
             } 

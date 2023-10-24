@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function CadastroReceita() {
+export default function RegisterRecipes() {
 
     const navigation = useNavigation();
 

@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 import RecipeScreen from '../views/Recipe';
 import LoginScreen from '../views/Login';
 import RegisterScreen from '../views/Register';
-import CadastroReceita from '../views/CadastroReceita';
+import RegisterRecipes from '../views/RegisterRecipes';
 
 import TabNavigator from './TabNavigator';
 import { UserProvider } from '../contexts/UserContext';
@@ -32,7 +32,7 @@ const Routes = () => {
                     <Stack.Screen name="Register" component={RegisterScreen} />
                     <Stack.Screen name="Home" component={TabNavigator} />
                     <Stack.Screen name="Recipe" component={RecipeScreen} />
-                    <Stack.Screen name="CadastroReceita" component={CadastroReceita} />
+                    <Stack.Screen name="RegisterRecipes" component={RegisterRecipes} />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserProvider>

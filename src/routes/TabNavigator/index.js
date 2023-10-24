@@ -10,7 +10,7 @@ import HomeScreen from '../../views/Home';
 import ProfileScreen from '../../views/Profile'
 import FavoritesScreen from '../../views/Favorites';
 import MyRecipesScreen from '../../views/MyRecipes';
-import CadastroReceita from '../../views/CadastroReceita';
+import RegisterRecipes from '../../views/RegisterRecipes';
 
 const Tab = createBottomTabNavigator();
 
@@ -90,7 +90,7 @@ const TabNavigator = () => {
         <Tab.Navigator initialRouteName={route} screenOptions={{ headerShown: false }} tabBar={(props) => <TabBar {...props} currentRoute={route} setRoute={setRoute} />}>
             <Tab.Screen name="MyHome" component={HomeScreen} />
             <Tab.Screen name="Favorites" component={FavoritesScreen} />
-            <Tab.Screen name="AddRecipe" component={CadastroReceita} />
+            <Tab.Screen name="AddRecipe" component={RegisterRecipes} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
             <Tab.Screen name="MyRecipes" component={MyRecipesScreen} />
         </Tab.Navigator>

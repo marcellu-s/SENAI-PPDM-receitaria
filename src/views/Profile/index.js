@@ -18,19 +18,26 @@ export default function ProfileScreen() {
 
         async function getUser() {
 
-            const user = await getUserData(userData.id);
-            
-            if (user.status === false) {
-                
-                alert(user.msg);
+            const data = await getUserData(userData.id);
 
+            
+            if (data.status === false) {
+                
+                alert(data.msg);
+                
                 return;
             }
             
-            console.log(user);
+            const user = data.user;
+
+            setNome(user.name);
+            setSobrenome(user.lastName);
+            setEmail(user.email);
+            setSenha(user.password);
         }
 
         getUser();
+
 
     }, []);
 
@@ -62,7 +69,7 @@ export default function ProfileScreen() {
                 </View>
                 <View style={{ marginTop: 10}}>
                     <Image style={{width:100 , height:100 , borderRadius: 100/2, marginLeft: 135 }} source={require('../../assets/images/transferir.png')}/>
-                    <Text style={styles.subtitle}>Nome do perfil</Text>
+                    <Text style={styles.subtitle}> {`${nome} ${sobrenome} `} </Text>
                 </View>
                 <View style={styles.inputWrapperDouble}>
                     <TextInput value={nome} style={styles.input} onChangeText={(value) => setNome(value)} placeholderTextColor={'#ffff'} placeholder='Nome' />

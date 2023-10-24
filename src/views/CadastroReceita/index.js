@@ -16,9 +16,9 @@ export default function CadastroReceita() {
     const navigation = useNavigation();
 
     const [dificuldade, setDificuldade] = useState('Selecione');
-    const [ingredientes, setIngredientes] = useState(['arroz']);
-    const [modoDePreparo, setModoDePreparo] = useState(['Leve ao forno', 'Humideça']);
-    const [categoria, setCategoria] = useState(['bolo', 'massas', 'sobremesa']);
+    const [ingredientes, setIngredientes] = useState([]);
+    const [modoDePreparo, setModoDePreparo] = useState([]);
+    const [categoria, setCategoria] = useState([]);
     const [inputTexto, setInputTexto] = useState('');
     const [inputTextoModoDePreparo, setInputTextoModoDePreparo] = useState('');
     const [inputTextoCategoria, setInputTextoCategoria] = useState('');
@@ -115,7 +115,7 @@ export default function CadastroReceita() {
                         <TextInput
                             style={styles.input}
                             placeholderTextColor="#fff"
-                            placeholder="cole o link da imagem aqui!!!"
+                            placeholder="Cole o link da imagem aqui!!!"
                         />
                         <View style={{ flexDirection: "row", alignItems: "center", gap: 10, }}>
                             <Text style={styles.textTitulo2}>Tempo:</Text>
@@ -139,13 +139,15 @@ export default function CadastroReceita() {
                         </View>
                         <View style={{ flexDirection: "row", alignItems: "center", gap: 10, }}>
                             <Text style={styles.textTitulo2}>Dificuldade:</Text>
-                            <Picker style={{ width: '50%', height: 50, backgroundColor: "#242A37", color: '#fff', }} selectedValue={dificuldade} onValueChange={(value) => { setDificuldade(value) }}>
-                                <Picker.Item value='Selecione' label="Selecione" />
-                                <Picker.Item value='Baixo' label="Baixo" />
-                                <Picker.Item value='Medio' label="Médio" />
-                                <Picker.Item value='Alto' label="Alto" />
+                            <View style={{ width: '50%', height: 50, backgroundColor: "#242A37", borderRadius: 10, }}>
+                                <Picker style={{color: '#fff',}} selectedValue={dificuldade} onValueChange={(value) => { setDificuldade(value) }}>
+                                    <Picker.Item value='Selecione' label="Selecione" />
+                                    <Picker.Item value='Baixo' label="Baixo" />
+                                    <Picker.Item value='Medio' label="Médio" />
+                                    <Picker.Item value='Alto' label="Alto" />
 
-                            </Picker>
+                                </Picker>
+                            </View>
                         </View>
                         <View style={{ gap: 10, }}>
                             <Text style={styles.textTitulo}>Ingredientes:</Text>
@@ -238,10 +240,11 @@ export default function CadastroReceita() {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <TouchableOpacity style={{backgroundColor: 'red'}}>
-                            <Text>Hello</Text>
-                            <Entypo name="check" size={24} color="black" />
-                        </TouchableOpacity>
+                        <View style={{ alignItems: 'center', marginTop: 10, }}>
+                            <TouchableOpacity style={{ width: '100%', height: 50, justifyContent: 'center', borderRadius: 10, backgroundColor: 'orange' }}>
+                                <Text style={{ textAlign: 'center', fontSize: 20, color: '#fff' }}>Cadastrar</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </SafeAreaView>
             </ScrollView>

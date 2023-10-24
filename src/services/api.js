@@ -71,7 +71,7 @@ export async function loginCall(email, password) {
             msg: "Opa, um erro aconteceu, mas não foi sua culpa, tente novamente"
         };
 
-    } catch(err) {
+    } catch (err) {
 
         console.log(err);
 
@@ -102,7 +102,7 @@ export async function registerCall({ name, lastName, email, password }) {
             msg: "Informe um e-mail válido"
         };
     }
-    
+
     // Realizando a requisição
     try {
 
@@ -146,7 +146,7 @@ export async function registerCall({ name, lastName, email, password }) {
             msg: "Opa, um erro aconteceu, mas não foi sua culpa, tente novamente"
         };
 
-    } catch(err) {
+    } catch (err) {
 
         console.log(err);
 
@@ -183,7 +183,7 @@ export async function getAllRecipes() {
             };
         }
 
-    } catch(err) {
+    } catch (err) {
 
         console.log(err);
 
@@ -228,7 +228,7 @@ export async function getUserData(id) {
                 msg: data.msg
             }
         }
-    } catch(err) {
+    } catch (err) {
 
         console.log(err);
 
@@ -236,5 +236,26 @@ export async function getUserData(id) {
             status: false,
             msg: 'Falha na autenticação, tente logar novamente!'
         };
+    }
+}
+export async function postRecipe(recipe) {
+    try {
+        const response = await fetch(`${baseURL}/recipe/`, {
+            method: 'POST',
+            headers: {
+                'Context-type': 'application/json',
+            },
+            body: JSON.stringify(recipe)
+        });
+        const data = await response.JSON();
+        if (data.status === "error") {
+
+            return {
+                status: false,
+                msg: data.msg
+            };
+        }
+    } catch (err) {
+        console.log(`Deu erro ${err}`)
     }
 }

@@ -3,7 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
-import { useContext } from "react";
 
 import { postRecipe } from "../../services/api";
 

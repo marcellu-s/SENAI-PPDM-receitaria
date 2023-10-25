@@ -24,7 +24,7 @@ const RecipeLayout = () => {
         let response;
         let inLoading = false;
 
-        if (fav === false && inLoading === false) {
+        if (inLoading === false) {
 
             inLoading = true;
             
@@ -34,7 +34,6 @@ const RecipeLayout = () => {
 
             if (response.status === false) {
 
-                inLoading = false;
                 setFav(false)
             }
 
@@ -101,8 +100,8 @@ const RecipeLayout = () => {
                 <View style={styles.ingredients}>
                     <Text style={styles.title}>Ingredientes</Text>
                     <View style={styles.ingredientsList}>
-
-                        {
+                        <Text>Em manutenção</Text>
+                        {/* {
                             ((recipe.ingredients[0].replace(/\[|\]|\s/g, '').split(','))).map((item, index) => {
                                 return (
                                     <View style={styles.ingredientitem} key={index}>
@@ -111,22 +110,23 @@ const RecipeLayout = () => {
                                     </View>
                                 )
                             })
-                        }
+                        } */}
                     </View>
                 </View>
                 <View style={styles.prepare}>
                     <Text style={styles.title}>Modo de Preparo</Text>
                     <View style={{gap: 24, marginBottom: 32}}>
+                        <Text>Em manutenção</Text>
 
                         {
-                            ((recipe.methodPreparation[0].replace(/\[|\]|\s/g, '').split(','))).map((item, index) => {
-                                return(
-                                    <View style={styles.prepareItem} key={index+1}>
-                                        <Text style={{color: '#333'}}>{index+1}</Text>
-                                        <Text style={styles.text}>{item}</Text>
-                                    </View>
-                                )
-                            })
+                            // ((recipe.methodPreparation[0].replace(/\[|\]|\s/g, '').split(','))).map((item, index) => {
+                            //     return(
+                            //         <View style={styles.prepareItem} key={index+1}>
+                            //             <Text style={{color: '#333'}}>{index+1}</Text>
+                            //             <Text style={styles.text}>{item}</Text>
+                            //         </View>
+                            //     )
+                            // })
                         }
                     </View>
                 </View>
@@ -160,15 +160,15 @@ const RecipeLayout = () => {
                 <View>
                     <Text style={{fontFamily: 'Poppins-Bold', fontSize: 16, color: '#333'}}>Categorias relacionadas</Text>
                     <View style={styles.categoriesWrapper}> 
-
+                        <Text>Em manutenção</Text>
                         {
-                            ((recipe.categories[0].replace(/\[|\]|\s/g, '').split(','))).map((item, index) => {
-                                return(
-                                    <TouchableOpacity style={styles.categorie} key={index}>
-                                        <Text style={styles.categorieText}>{item}</Text>
-                                    </TouchableOpacity>
-                                )
-                            })
+                            // ((recipe.categories[0].replace(/\[|\]|\s/g, '').split(','))).map((item, index) => {
+                            //     return(
+                            //         <TouchableOpacity style={styles.categorie} key={index}>
+                            //             <Text style={styles.categorieText}>{item}</Text>
+                            //         </TouchableOpacity>
+                            //     )
+                            // })
                         }
                     </View>
                 </View>

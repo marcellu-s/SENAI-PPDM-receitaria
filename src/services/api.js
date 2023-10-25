@@ -243,7 +243,7 @@ export async function postRecipe(recipe) {
     const tokenData = await getToken();
 
     try {
-        const response = await fetch(`${baseURL}/recipe=$`, {
+        const response = await fetch(`${baseURL}/recipe`, {
             method: 'POST',
             headers: {
                 'Context-type': 'application/json',
@@ -251,7 +251,7 @@ export async function postRecipe(recipe) {
             },
             body: JSON.stringify(recipe)
         });
-        const data = await response.JSON();
+        const data = await response.json();
         if (data.status === "error") {
 
             return {

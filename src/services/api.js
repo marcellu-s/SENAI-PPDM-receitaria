@@ -240,6 +240,7 @@ export async function getUserData(id) {
 }
 
 export async function postRecipe(recipe) {
+    console.log(recipe)
     const tokenData = await getToken();
 
     try {
@@ -252,6 +253,10 @@ export async function postRecipe(recipe) {
             body: JSON.stringify(recipe)
         });
         const data = await response.json();
+        console.log(data);
+
+
+
         if (data.status === "error") {
 
             return {

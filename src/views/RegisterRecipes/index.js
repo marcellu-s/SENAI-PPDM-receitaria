@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
+import { useContext } from "react";
 
 import { postRecipe } from "../../services/api";
 
@@ -11,6 +12,8 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function RegisterRecipes() {
+
+    const { userData } = useContext(UserContext)
 
     const navigation = useNavigation();
 
@@ -38,7 +41,10 @@ export default function RegisterRecipes() {
         recipe.ingredients = ingredientes;
         recipe.methodPreparation = modoDePreparo;
         recipe.categories = categoria;
-        
+        recipe.additionalInformation = '';
+        recipe.author = userData.name;
+        about,
+        recipe.creatorID = userData.id;
         postRecipe(recipe);
 
 

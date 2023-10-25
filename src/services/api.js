@@ -159,12 +159,12 @@ export async function registerCall({ name, lastName, email, password }) {
 
 // Exibir todas as receitas
 
-export async function getAllRecipes() {
+export async function getAllRecipes(userId) {
 
     try {
 
-        const response = await fetch(`${baseURL}/recipe/all`, {
-            method: 'GET'
+        const response = await fetch(`${baseURL}/recipe/all/${userId}`, {
+            method: 'GET',
         });
 
         const data = await response.json();
@@ -238,6 +238,7 @@ export async function getUserData(id) {
         };
     }
 }
+
 export async function postRecipe(recipe) {
     try {
         const response = await fetch(`${baseURL}/recipe/`, {
@@ -257,5 +258,65 @@ export async function postRecipe(recipe) {
         }
     } catch (err) {
         console.log(`Deu erro ${err}`)
+    }
+}
+
+export async function setFavRecipe(userId, recipeId, favoriteOrUnfavorite) {
+
+     // Verificando se existem dados
+     if (!userId || !recipeId) {
+
+        return {
+            status: false,
+            msg: "Opa, um erro aconteceu ao realizar essa ação!"
+        };
+    }
+
+    try {
+
+        const payload = {
+            userId,
+            recipeId
+        }
+
+        let response;
+
+        const tokenData = await getToken();
+
+        if (favoriteOrUnfavorite) {
+
+            response = await fetch(`${baseURL}/recipe/favorite`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${tokenData.token}`,
+                },
+                body: JSON.stringify(payload)
+            })
+        }
+
+        const data = await response.json();
+
+        if (data.code != 200) {
+
+            return {
+                status: false,
+                msg: data.msg
+            };
+        }
+
+        return {
+            status: true,
+            msg: data.msg
+        }
+
+    } catch(err) {
+
+        console.log(err);
+
+        return {
+            status: false,
+            msg: "Opa, um erro aconteceu ao realizar essa ação!"
+        };
     }
 }

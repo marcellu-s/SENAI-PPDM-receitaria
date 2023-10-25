@@ -1,11 +1,14 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useContext, useEffect } from 'react';
 import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
 import Recipe from '../Recipe';
 import { getAllRecipes } from '../../services/api';
+import { UserContext } from '../../contexts/UserContext';
 
 const RecipesDisplay = () => {
+
+    const { userData } = useContext(UserContext);
 
     const [ loading, setLoading ] = useState(false);
     const [ recipes, setRecipes ] = useState([]);
@@ -18,33 +21,32 @@ const RecipesDisplay = () => {
 
                 setLoading(true);
     
-                const data = await getAllRecipes();
+                const data = await getAllRecipes(userData.id);
     
                 if (data.status === true && data.recipes.length > 0) {
-    
-                    setRecipes(data.recipes);
-    
+
                     setLoading(false);
+
+                    setRecipes(data.recipes);
                 } else {
     
                     if (data.status === false) {
     
                         alert(data.msg);
+
+                        setLoading(false);
                     }
-    
-                    setLoading(false);
                 }
             }
-    
+
             getRecipes();
 
             return () => {
+
                 setRecipes([]);
             }
-
         }, [])
     );
-
 
     if (loading) {
 

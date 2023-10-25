@@ -1,7 +1,12 @@
-import React from 'react';
+import { useContext, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { Ionicons, AntDesign, FontAwesome, Entypo, Feather } from '@expo/vector-icons';
+import { Ionicons, AntDesign, FontAwesome, Entypo } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+
+
+import { UserContext } from '../../contexts/UserContext'
+import { setFavRecipe } from '../../services/api';
 
 const RecipeLayout = () => {
 
@@ -9,15 +14,52 @@ const RecipeLayout = () => {
 
     const recipe = useRoute().params;
 
+    const { userData } = useContext(UserContext);
+
+    const [fav, setFav] = useState(recipe.myFavorite);
+    const [stars, setStars] = useState(false);
+
+    async function favoriteOrUnfavorite() {
+
+        let response;
+        let inLoading = false;
+
+        if (fav === false && inLoading === false) {
+
+            inLoading = true;
+            
+            setFav(true);
+
+            response = await setFavRecipe(userData.id, recipe._id, true);
+
+            console.log(response);
+
+            if (response.status === false) {
+
+                inLoading = false;
+                setFav(false)
+            }
+
+            inLoading = false;
+
+        } else if (fav === true && inLoading === false) {
+
+            setFav(false);
+        }
+
+        alert(response.msg)
+
+    }
+
     return (
         <View>
             <View>
                 <View style={styles.navbar}> 
-                        <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
-                            <Ionicons name="arrow-back-circle-outline" size={32} color="black" />   
-                        </TouchableOpacity>
-                    <TouchableOpacity>
-                        <AntDesign name="hearto" size={28} color="#FE8A07" />
+                    <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
+                        <Ionicons name="arrow-back-circle-outline" size={32} color="black" />   
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => favoriteOrUnfavorite()}>
+                        <AntDesign name={ fav ? "heart" : "hearto"} size={28} color="#FE8A07" />
                     </TouchableOpacity>
                 </View>
                 <Text style={{fontSize: 32, fontFamily: 'Poppins-Bold', textAlign: 'center', marginTop: 21}}>{recipe.title}</Text>
@@ -97,11 +139,21 @@ const RecipeLayout = () => {
                 <View style={{marginVertical: 32, backgroundColor: '#333', padding: 16, borderRadius: 16}}>
                     <Text style={{textAlign: 'center', marginBottom: 16, fontFamily: 'Poppins-Bold', fontSize: 24, color: '#FE8A07'}}>Avalie essa receita!</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 8}}>
-                        <Feather name="star" size={24} color="#FFCF5C" />
-                        <Feather name="star" size={24} color="#FFCF5C" />
-                        <Feather name="star" size={24} color="#FFCF5C" />
-                        <Feather name="star" size={24} color="#FFCF5C" />
-                        <Feather name="star" size={24} color="#FFCF5C" />
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 1 ? setStars(1) : setStars(false) }>
+                            <Icon name={stars >= 1 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 2 ? setStars(2) : setStars(false) }>
+                            <Icon name={stars >= 2 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 3 ? setStars(3) : setStars(false) }>
+                            <Icon name={stars >= 3 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 4 ? setStars(4) : setStars(false) }>
+                            <Icon name={stars >= 4 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => typeof stars === Boolean || stars != 5 ? setStars(5) : setStars(false) }>
+                            <Icon name={stars >= 5 ? "star" : "star-outline"} size={24} color="#FFCF5C" />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{borderWidth: 1, borderColor: '#999', padding: 32, borderRadius: 16, marginBottom: 32}}>

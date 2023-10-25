@@ -4,6 +4,8 @@ import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, Image, Tou
 import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
 
+import { postRecipe } from "../../services/api";
+
 import Add from "../../assets/images/Add.png";
 import Remove from "../../assets/images/Remove.png";
 
@@ -19,9 +21,33 @@ export default function RegisterRecipes() {
     const [ingredientes, setIngredientes] = useState([]);
     const [modoDePreparo, setModoDePreparo] = useState([]);
     const [categoria, setCategoria] = useState([]);
+    const [inputQts, setInputQts] = useState('');
+    const [inputTime, setInputTime] = useState('');
+    const [inputUrl, setInputUrl] = useState('');
+    const [inputTitle, setInputTitle] = useState('');
     const [inputTexto, setInputTexto] = useState('');
     const [inputTextoModoDePreparo, setInputTextoModoDePreparo] = useState('');
     const [inputTextoCategoria, setInputTextoCategoria] = useState('');
+
+    function enviar() {
+
+        var recipe = new Object();
+        recipe.title = inputTitle;
+        recipe.image = inputUrl;
+        recipe.duration = inputTime;
+        recipe.difficult = dificuldade;
+        recipe.duration = inputTime;
+        recipe.portion = inputQts;
+        recipe.ingredients = ingredientes;
+        recipe.methodPreparation = modoDePreparo;
+        recipe.categories = categoria;
+        // recipe.author = Storage('token');
+        
+        console.log(postRecipe(recipe))
+
+
+        // additionalInformation, creatorID
+    }
 
     const handleTextChange = (texto, indexItem) => {
         const newIngredientes = [...ingredientes]; // Cria uma cópia do array ingredientes
@@ -110,12 +136,17 @@ export default function RegisterRecipes() {
                             style={styles.input}
                             placeholderTextColor="#fff"
                             placeholder="Digite o titulo da receita."
+                            multiline={true}
+                            value={inputTitle}
+                            onChangeText={(texto) => setInputTitle(texto)}
                         />
                         <Text style={styles.textTitulo}>Imagem:</Text>
                         <TextInput
                             style={styles.input}
                             placeholderTextColor="#fff"
                             placeholder="Cole o link da imagem aqui!!!"
+                            value={inputUrl}
+                            onChangeText={(texto) => setInputUrl(texto)}
                         />
                         <View style={{ flexDirection: "row", alignItems: "center", gap: 10, }}>
                             <Text style={styles.textTitulo2}>Tempo:</Text>
@@ -125,6 +156,8 @@ export default function RegisterRecipes() {
                                 placeholderTextColor="#fff"
                                 placeholder="Min"
                                 maxLength={3}
+                                value={inputTime}
+                                onChangeText={(texto) => setInputTime(texto)}
                             />
                         </View>
                         <View style={{ flexDirection: "row", alignItems: "center", gap: 10, }}>
@@ -135,12 +168,14 @@ export default function RegisterRecipes() {
                                 placeholderTextColor="#fff"
                                 placeholder="Qts"
                                 maxLength={2}
+                                value={inputQts}
+                                onChangeText={(texto) => setInputQts(texto)}
                             />
                         </View>
                         <View style={{ flexDirection: "row", alignItems: "center", gap: 10, }}>
                             <Text style={styles.textTitulo2}>Dificuldade:</Text>
                             <View style={{ width: '50%', height: 50, backgroundColor: "#242A37", borderRadius: 10, }}>
-                                <Picker style={{color: '#fff',}} selectedValue={dificuldade} onValueChange={(value) => { setDificuldade(value) }}>
+                                <Picker style={{ color: '#fff', }} selectedValue={dificuldade} onValueChange={(value) => { setDificuldade(value) }}>
                                     <Picker.Item value='Selecione' label="Selecione" />
                                     <Picker.Item value='Baixo' label="Baixo" />
                                     <Picker.Item value='Medio' label="Médio" />
@@ -241,7 +276,7 @@ export default function RegisterRecipes() {
                             </View>
                         </View>
                         <View style={{ alignItems: 'center', marginTop: 10, }}>
-                            <TouchableOpacity style={{ width: '100%', height: 50, justifyContent: 'center', borderRadius: 10, backgroundColor: 'orange' }}>
+                            <TouchableOpacity style={{ width: '100%', height: 50, justifyContent: 'center', borderRadius: 10, backgroundColor: 'orange' }} onPress={() => enviar()}>
                                 <Text style={{ textAlign: 'center', fontSize: 20, color: '#fff' }}>Cadastrar</Text>
                             </TouchableOpacity>
                         </View>

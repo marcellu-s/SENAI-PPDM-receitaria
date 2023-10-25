@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import { showConfirmLogoutDialog } from '../Confirm';
 import { UserContext } from '../../contexts/UserContext';
-import { Search } from '../../services/search';
 
 const HeaderApp = () => {
 

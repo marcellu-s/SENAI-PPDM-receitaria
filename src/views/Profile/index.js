@@ -54,14 +54,14 @@ export default function ProfileScreen() {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ padding: 20 }}>
-                <View style={{flexDirection:'row', justifyContent: 'space-between', marginTop: 30, paddingHorizontal: 3}}>
+        <SafeAreaView style={{ flex: 1, paddingVertical: 40, backgroundColor: "fff", marginBottom: 20 }}>
+            <ScrollView>
+                <View style={{flexDirection:'row', justifyContent: 'space-between', paddingHorizontal: 3, alignItems: 'center'}}>
                     <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
                         <Feather name="arrow-left-circle" size={32} color="black" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
-                        <Text style={{ fontSize: 17, fontFamily: 'Poppins-Bold', marginTop: 1}}>Salvar</Text>
+                        <Text style={{ fontSize: 17, fontFamily: 'Poppins-Bold'}}>Salvar</Text>
                     </TouchableOpacity>
                 </View>
                 <View>

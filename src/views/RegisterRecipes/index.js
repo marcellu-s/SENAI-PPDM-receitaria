@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
 

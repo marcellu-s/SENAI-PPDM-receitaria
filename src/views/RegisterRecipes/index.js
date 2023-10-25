@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
-
+import { UserContext } from "../../contexts/UserContext";
 import { postRecipe } from "../../services/api";
 
 import { useNavigation } from '@react-navigation/native';
@@ -28,7 +28,7 @@ export default function RegisterRecipes() {
     const [inputTitle, setInputTitle] = useState('');
     const [inputTexto, setInputTexto] = useState('');
     const [inputTextoModoDePreparo, setInputTextoModoDePreparo] = useState('');
-    const [inputTextoCategoria, setInputTextoCategoria] = useState('');
+    const [inputTextoCategoria, setInputTextoCategoria] = useState([]);
 
     function enviar() {
 
@@ -285,6 +285,7 @@ export default function RegisterRecipes() {
                                 style={styles.inputModo}
                                 placeholderTextColor="#fff"
                                 placeholder="Escreva um breve resumo sobre sua receita!!"
+                                multiline={true}
                                 value={inputAbout}
                                 onChangeText={(texto) => setInputAbout(texto)}
                             />
@@ -303,6 +304,7 @@ export default function RegisterRecipes() {
                                 style={styles.inputModo}
                                 placeholderTextColor="#fff"
                                 placeholder="Escreva um texto sobre sua receita!!"
+                                multiline={true}
                                 value={inputAdditionalInformation}
                                 onChangeText={(texto) => setInputAdditionalInformation(texto)}
                             />

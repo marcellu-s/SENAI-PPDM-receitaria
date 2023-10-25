@@ -241,8 +241,7 @@ export async function getUserData(id) {
 
 export async function postRecipe(recipe) {
     const tokenData = await getToken();
-    console.log(recipe)
-    //Verificar se tem dados faltando antes da requisição
+
     try {
         const response = await fetch(`${baseURL}/recipe=$`, {
             method: 'POST',

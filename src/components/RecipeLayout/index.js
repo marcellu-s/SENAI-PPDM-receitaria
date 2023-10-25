@@ -30,9 +30,7 @@ const RecipeLayout = () => {
             
             setFav(true);
 
-            response = await setFavRecipe(userData.id, recipe._id, true);
-
-            console.log(response);
+            response = await setFavRecipe(userData.id, recipe._id);
 
             if (response.status === false) {
 
@@ -41,10 +39,6 @@ const RecipeLayout = () => {
             }
 
             inLoading = false;
-
-        } else if (fav === true && inLoading === false) {
-
-            setFav(false);
         }
 
         alert(response.msg)

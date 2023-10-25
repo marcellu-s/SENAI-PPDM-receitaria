@@ -264,7 +264,7 @@ export async function postRecipe(recipe) {
     }
 }
 
-export async function setFavRecipe(userId, recipeId, favoriteOrUnfavorite) {
+export async function setFavRecipe(userId, recipeId) {
 
     // Verificando se existem dados
     if (!userId || !recipeId) {
@@ -282,21 +282,16 @@ export async function setFavRecipe(userId, recipeId, favoriteOrUnfavorite) {
             recipeId
         }
 
-        let response;
-
         const tokenData = await getToken();
 
-        if (favoriteOrUnfavorite) {
-
-            response = await fetch(`${baseURL}/recipe/favorite`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${tokenData.token}`,
-                },
-                body: JSON.stringify(payload)
-            })
-        }
+        const response = await fetch(`${baseURL}/recipe/favorite`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${tokenData.token}`,
+            },
+            body: JSON.stringify(payload)
+        })
 
         const data = await response.json();
 

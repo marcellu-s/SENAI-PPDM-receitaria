@@ -6,9 +6,6 @@ import { Picker } from "@react-native-picker/picker";
 
 import { postRecipe } from "../../services/api";
 
-import Add from "../../assets/images/Add.png";
-import Remove from "../../assets/images/Remove.png";
-
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -41,12 +38,11 @@ export default function RegisterRecipes() {
         recipe.ingredients = ingredientes;
         recipe.methodPreparation = modoDePreparo;
         recipe.categories = categoria;
-        // recipe.author = Storage('token');
         
-        console.log(postRecipe(recipe))
+        postRecipe(recipe);
 
 
-        // additionalInformation, creatorID
+
     }
 
     const handleTextChange = (texto, indexItem) => {

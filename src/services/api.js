@@ -240,11 +240,15 @@ export async function getUserData(id) {
 }
 
 export async function postRecipe(recipe) {
+    const tokenData = await getToken();
+    console.log(recipe)
+    //Verificar se tem dados faltando antes da requisição
     try {
-        const response = await fetch(`${baseURL}/recipe/`, {
+        const response = await fetch(`${baseURL}/recipe=$`, {
             method: 'POST',
             headers: {
                 'Context-type': 'application/json',
+                'Authorization': `Bearer ${tokenData.token}`,
             },
             body: JSON.stringify(recipe)
         });
@@ -263,8 +267,8 @@ export async function postRecipe(recipe) {
 
 export async function setFavRecipe(userId, recipeId, favoriteOrUnfavorite) {
 
-     // Verificando se existem dados
-     if (!userId || !recipeId) {
+    // Verificando se existem dados
+    if (!userId || !recipeId) {
 
         return {
             status: false,
@@ -310,7 +314,7 @@ export async function setFavRecipe(userId, recipeId, favoriteOrUnfavorite) {
             msg: data.msg
         }
 
-    } catch(err) {
+    } catch (err) {
 
         console.log(err);
 

@@ -21,6 +21,8 @@ export default function RegisterRecipes() {
     const [ingredientes, setIngredientes] = useState([]);
     const [modoDePreparo, setModoDePreparo] = useState([]);
     const [categoria, setCategoria] = useState([]);
+    const [inputAdditionalInformation, setInputAdditionalInformation] = useState('');
+    const [inputAbout, setInputAbout] = useState('');
     const [inputQts, setInputQts] = useState('');
     const [inputTime, setInputTime] = useState('');
     const [inputUrl, setInputUrl] = useState('');
@@ -43,7 +45,8 @@ export default function RegisterRecipes() {
         recipe.categories = categoria;
         recipe.additionalInformation = '';
         recipe.author = userData.name;
-        about,
+        recipe.about = inputAbout;
+        recipe.additionalInformation = inputAdditionalInformation;
         recipe.creatorID = userData.id;
         postRecipe(recipe);
 
@@ -267,6 +270,42 @@ export default function RegisterRecipes() {
                                 placeholder="Adicione Aqui!!"
                                 value={inputTextoCategoria}
                                 onChangeText={(texto) => setInputTextoCategoria(texto)}
+                            />
+                            <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
+                                <TouchableOpacity onPress={() => addCategoria()}>
+                                    <AntDesign name="pluscircle" size={32} color="orange" />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => removeCategoria()}>
+                                    <AntDesign name="minuscircle" size={32} color="black" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{ gap: 5, }} >
+                            <Text style={styles.textTitulo}>Sobre:</Text>
+                            <TextInput
+                                style={styles.inputModo}
+                                placeholderTextColor="#fff"
+                                placeholder="Escreva um breve resumo sobre sua receita!!"
+                                value={inputAbout}
+                                onChangeText={(texto) => setInputAbout(texto)}
+                            />
+                            <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
+                                <TouchableOpacity onPress={() => addCategoria()}>
+                                    <AntDesign name="pluscircle" size={32} color="orange" />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => removeCategoria()}>
+                                    <AntDesign name="minuscircle" size={32} color="black" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{ gap: 5, }} >
+                            <Text style={styles.textTitulo}>Informações Adicional:</Text>
+                            <TextInput
+                                style={styles.inputModo}
+                                placeholderTextColor="#fff"
+                                placeholder="Escreva um texto sobre sua receita!!"
+                                value={inputAdditionalInformation}
+                                onChangeText={(texto) => setInputAdditionalInformation(texto)}
                             />
                             <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
                                 <TouchableOpacity onPress={() => addCategoria()}>

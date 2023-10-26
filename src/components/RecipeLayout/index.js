@@ -34,7 +34,7 @@ const RecipeLayout = () => {
 
             if (response.status === false) {
 
-                setFav(false)
+                setFav(!!fav)
             }
 
             inLoading = false;

@@ -28,13 +28,13 @@ const RecipeLayout = () => {
 
             inLoading = true;
             
-            setFav(true);
+            setFav(!fav);
 
             response = await setFavRecipe(userData.id, recipe._id);
 
             if (response.status === false) {
 
-                setFav(false)
+                setFav(!!fav)
             }
 
             inLoading = false;

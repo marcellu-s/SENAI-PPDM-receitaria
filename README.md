@@ -1,16 +1,22 @@
 # RECEITARIA Primavera
 
-![Thumb Receitaria Primavera](https://raw.githubusercontent.com/marcellu-s/SENAI-PPDM-receitaria/main/src/assets/images/Thumb.jpg?token=GHSAT0AAAAAACJNIZVD7BVSYNLRFR5QCRCKZJZW5DQ)
+![Thumb Receitaria Primavera](https://github.com/marcellu-s/SENAI-PPDM-receitaria/blob/main/src/assets/images/Thumb.jpg?raw=true)
 
 > Sobre
 
 ## Funcionalidades
 
-
+- Criação de conta: Os usuários podem criar uma conta no aplicativo para acessar recursos adicionais.
+- Visualização de receitas: Os usuários podem navegar e visualizar uma variedade de receitas disponíveis.
+- Favoritar receitas: Os usuários têm a opção de favoritar receitas específicas para acessá-las facilmente posteriormente.
+- Criação de receitas: Os usuários podem criar suas próprias receitas personalizadas e compartilhá-las com outros usuários.
 
 ## Como usar
 
-
+- Criar uma conta no aplicativo.
+- Navegar pelas receitas disponíveis.
+- Favoritar receitas específicas.
+- Criar suas próprias receitas personalizadas.
 
 ## Instalação e Execução
 Siga os passos abaixo para clonar, instalar dependências e executar o aplicativo:

@@ -2,7 +2,7 @@
 
 ![Thumb Receitaria Primavera](https://github.com/marcellu-s/SENAI-PPDM-receitaria/blob/main/src/assets/images/Thumb.jpg?raw=true)
 
-> Sobre
+> Este é um aplicativo de receitas desenvolvido em React Native, que permite aos usuários encontrar receitas de variados pratos, contendo os ingredientes e método de preparo entre outras informações. Os usuários também vão poder favoritar as receitas que eles mais gostarem para ver mais tarde. Além disso, o usuário poderá criar suas próprias receitas e compartilhar seus deliciosos pratos com outras pessoas!
 
 ## Funcionalidades
 

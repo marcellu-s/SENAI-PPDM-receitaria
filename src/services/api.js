@@ -158,7 +158,6 @@ export async function registerCall({ name, lastName, email, password }) {
 }
 
 // Exibir todas as receitas
-
 export async function getAllRecipes(userId) {
 
     try {
@@ -169,13 +168,135 @@ export async function getAllRecipes(userId) {
 
         const data = await response.json();
 
-        if (data.code === 200) {
+        if (data.code === 200 && data.recipes) {
 
             return {
                 status: true,
                 recipes: data.recipes
             };
         } else {
+
+            if (data.code === 200) {
+
+                return {
+                    status: true,
+                    msg: data.msg
+                };
+            }
+
+            return {
+                status: false,
+                msg: "Opa, um erro aconteceu ao carregar as receitas!"
+            };
+        }
+
+    } catch (err) {
+
+        console.log(err);
+
+        return {
+            status: false,
+            msg: "Opa, um erro aconteceu ao carregar as receitas!"
+        };
+    }
+}
+
+// Exbir as receitas favoritas
+export async function getMyFavRecipes(userId) {
+
+    try {
+
+        const tokenData = await getToken();
+
+        if (tokenData.status === false) {
+
+            return {
+                status: false,
+                msg: 'Falha na autenticação, tente logar novamente!'
+            };
+        }
+
+        const response = await fetch(`${baseURL}/recipe/user/favorite/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${tokenData.token}`,
+            },
+        });
+
+        const data = await response.json();
+
+        if (data.code === 200 && data.recipes) {
+
+            return {
+                status: true,
+                recipes: data.recipes
+            };
+        } else {
+
+            if (data.code === 200) {
+
+                return {
+                    status: true,
+                    msg: data.msg
+                };
+            }
+
+            return {
+                status: false,
+                msg: "Opa, um erro aconteceu ao carregar as receitas!"
+            };
+        }
+
+    } catch (err) {
+
+        console.log(err);
+
+        return {
+            status: false,
+            msg: "Opa, um erro aconteceu ao carregar as receitas!"
+        };
+    }
+}
+
+// Exibir minhas receitas criadas
+export async function getMyRecipes(userId) {
+
+    try {
+
+        const tokenData = await getToken();
+
+        if (tokenData.status === false) {
+
+            return {
+                status: false,
+                msg: 'Falha na autenticação, tente logar novamente!'
+            };
+        }
+
+        const response = await fetch(`${baseURL}/recipe/user/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${tokenData.token}`,
+            },
+        });
+
+        const data = await response.json();
+
+        if (data.code === 200 && data.recipes) {
+
+            return {
+                status: true,
+                recipes: data.recipes
+            };
+        } else {
+
+            if (data.code === 200) {
+
+                return {
+                    status: true,
+                    msg: data.msg
+                };
+            }
 
             return {
                 status: false,

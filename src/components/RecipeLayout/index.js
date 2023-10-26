@@ -35,13 +35,12 @@ const RecipeLayout = () => {
             if (response.status === false) {
 
                 setFav(!!fav)
+
+                alert(response.msg)
             }
 
             inLoading = false;
         }
-
-        alert(response.msg)
-
     }
 
     return (

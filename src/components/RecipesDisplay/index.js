@@ -3,7 +3,7 @@ import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 
 import Recipe from '../Recipe';
-import { getAllRecipes } from '../../services/api';
+import { getAllRecipes, getMyFavRecipes, getMyRecipes } from '../../services/api';
 import { UserContext } from '../../contexts/UserContext';
 
 const RecipesDisplay = () => {
@@ -24,12 +24,23 @@ const RecipesDisplay = () => {
             async function getRecipes() {
 
                 setLoading(true);
-    
-                const data = await getAllRecipes(userData.id);
-    
-                if (data.status === true && data.recipes.length > 0) {
 
-                    setLoading(false);
+                let data;
+
+                if (currentRoute == 'MyHome') {
+
+                    data = await getAllRecipes(userData.id);
+    
+                } else if (currentRoute == 'Favorites') {
+    
+                    data = await getMyFavRecipes(userData.id);
+    
+                } else if (currentRoute == 'MyRecipes') {
+    
+                    data = await getMyRecipes(userData.id);
+                }
+
+                if (data.status === true && data.recipes && data.recipes.length > 0) {
 
                     setRecipes(data.recipes);
                 } else {
@@ -37,31 +48,21 @@ const RecipesDisplay = () => {
                     if (data.status === false) {
     
                         alert(data.msg);
-
-                        setLoading(false);
                     }
                 }
+
+                setLoading(false);
             }
 
-            if (currentRoute == 'MyHome') {
-
-                getRecipes();
-
-            } else if (currentRoute == 'Favorites') {
-
-                console.log(currentRoute);
-
-            } else if (currentRoute == 'MyRecipes') {
-
-                console.log(currentRoute);
-            }
-
+            getRecipes();
 
             return () => {
 
                 setRecipes([]);
             }
         }, [])
+
+        
     );
 
     if (loading) {

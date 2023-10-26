@@ -20,10 +20,10 @@ Siga os passos abaixo para clonar, instalar dependências e executar o aplicativ
 
 ```bash
 # Clone este repositório
-git clone https://github.com/marcellu-s/SENAI-PPDM-churrasria.git
+git clone https://github.com/marcellu-s/SENAI-PPDM-receitaria.git
 
 # Navegue para o diretório do projeto
-cd SENAI-PPDM-churrasria
+cd SENAI-PPDM-receitaria
 
 # Instale as dependências do projeto
 npm install

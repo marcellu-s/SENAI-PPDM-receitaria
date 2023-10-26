@@ -26,7 +26,7 @@ const Header = () => {
                 </TouchableOpacity>
             </View>
 
-            <Text style={stylesHeader.headlineText}>Veja suas receitas salvas!</Text>
+            <Text style={stylesHeader.headlineText}>Veja suas receitas criadas!</Text>
 
             <View style={stylesHeader.inputSearch}>
                 <TextInput style={stylesHeader.input} placeholder={'Procure uma receita'} placeholderTextColor={'#fff'} />

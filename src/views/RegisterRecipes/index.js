@@ -41,9 +41,9 @@ export default function RegisterRecipes() {
         recipe.difficult = dificuldade;
         recipe.portion = inputQts;
         recipe.additionalInformation = inputAdditionalInformation;
-        recipe.ingredients = ingredientes;
-        recipe.methodPreparation = modoDePreparo;
-        recipe.categories = categoria;
+        recipe.ingredients = ingredientes.join(';');
+        recipe.methodPreparation = modoDePreparo.join(';');
+        recipe.categories = categoria.join(';');
         recipe.creatorID = userData.id;
         postRecipe(recipe);
 

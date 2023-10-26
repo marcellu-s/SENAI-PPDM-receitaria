@@ -1,12 +1,14 @@
 import { useState, useCallback, useContext } from 'react';
 import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 
 import Recipe from '../Recipe';
 import { getAllRecipes } from '../../services/api';
 import { UserContext } from '../../contexts/UserContext';
 
 const RecipesDisplay = () => {
+
+    const route = useRoute()
 
     const { userData } = useContext(UserContext);
 
@@ -16,6 +18,8 @@ const RecipesDisplay = () => {
     useFocusEffect(
 
         useCallback(() => {
+
+            const currentRoute = route.name
 
             async function getRecipes() {
 
@@ -39,7 +43,19 @@ const RecipesDisplay = () => {
                 }
             }
 
-            getRecipes();
+            if (currentRoute == 'MyHome') {
+
+                getRecipes();
+
+            } else if (currentRoute == 'Favorites') {
+
+                console.log(currentRoute);
+
+            } else if (currentRoute == 'MyRecipes') {
+
+                console.log(currentRoute);
+            }
+
 
             return () => {
 

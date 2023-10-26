@@ -1,6 +1,6 @@
 # RECEITARIA Primavera
 
-![Churrasco](https://raw.githubusercontent.com/marcellu-s/SENAI-PPDM-receitaria/main/src/assets/images/Thumb.jpg?token=GHSAT0AAAAAACJNIZVCH4TMMA3CSBLNJYH4ZJZWGUA)
+![Thumb Receitaria Primavera](https://raw.githubusercontent.com/marcellu-s/SENAI-PPDM-receitaria/main/src/assets/images/Thumb.jpg?token=GHSAT0AAAAAACJNIZVD7BVSYNLRFR5QCRCKZJZW5DQ)
 
 > Sobre
 

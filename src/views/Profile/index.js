@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { getUserData } from '../../services/api';
 import { UserContext } from '../../contexts/UserContext';
@@ -41,9 +40,6 @@ export default function ProfileScreen() {
 
     }, []);
 
-    const navigation = useNavigation();
-
-
     function editar() {
 
         if (onPress = true) {
@@ -54,13 +50,10 @@ export default function ProfileScreen() {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, paddingVertical: 40, backgroundColor: "fff", marginBottom: 20 }}>
-            <ScrollView>
-                <View style={{flexDirection:'row', justifyContent: 'space-between', paddingHorizontal: 3, alignItems: 'center'}}>
-                    <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
-                        <Feather name="arrow-left-circle" size={32} color="black" />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView style={{ paddingVertical: 40, backgroundColor: "fff", paddingHorizontal: 20 }}>
+                <View style={{flexDirection:'row', justifyContent: 'flex-end'}}>
+                    <TouchableOpacity>
                         <Text style={{ fontSize: 17, fontFamily: 'Poppins-Bold'}}>Salvar</Text>
                     </TouchableOpacity>
                 </View>
@@ -83,11 +76,11 @@ export default function ProfileScreen() {
                         <TextInput value={senha} style={styles.input2} onChangeText={(value) => setSenha(value)} placeholderTextColor={'#ffff'} placeholder='Senha' />
                     </View>
                 </View>
-            <View style={{ marginVertical: 20, paddingVertical: 20 }}>
-                <TouchableOpacity style={styles.button} onPress={() => editar()}>
-                    <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', fontFamily: 'Poppins-Bold' }}>EDITAR</Text>
-                </TouchableOpacity>
-            </View>
+                <View style={{ marginVertical: 20, paddingVertical: 20 }}>
+                    <TouchableOpacity style={styles.button} onPress={() => editar()}>
+                        <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', fontFamily: 'Poppins-Bold' }}>EDITAR</Text>
+                    </TouchableOpacity>
+                </View>
         </ScrollView>
         </SafeAreaView >
     );

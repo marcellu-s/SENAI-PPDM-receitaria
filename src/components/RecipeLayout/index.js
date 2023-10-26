@@ -4,7 +4,6 @@ import { Ionicons, AntDesign, FontAwesome, Entypo } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-
 import { UserContext } from '../../contexts/UserContext'
 import { setFavRecipe } from '../../services/api';
 
@@ -47,7 +46,9 @@ const RecipeLayout = () => {
         <View>
             <View>
                 <View style={styles.navbar}> 
-                    <TouchableOpacity onPress={() => navigation.navigate('MyHome')}>
+                    <TouchableOpacity onPress={() => {
+                            navigation.goBack()
+                        }}>
                         <Ionicons name="arrow-back-circle-outline" size={32} color="black" />   
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => favoriteOrUnfavorite()}>

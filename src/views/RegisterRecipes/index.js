@@ -128,9 +128,9 @@ export default function RegisterRecipes() {
             <ScrollView >
                 <SafeAreaView style={styles.homeScreenContainer}>
                     <StatusBar style="auto" />
-                    <TouchableOpacity style={{ marginBottom: 50, }} onPress={() => navigation.navigate('MyHome')}>
-                        <Ionicons name="arrow-back-circle-outline" size={32} color="black" />
-                    </TouchableOpacity>
+                    <View>
+                        <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 32, textAlign: 'center' }}>Crie sua receita!</Text>
+                    </View>
                     <View style={{ gap: 10, }}>
                         <Text style={styles.textTitulo}>Titulo:</Text>
                         <TextInput
@@ -281,7 +281,7 @@ export default function RegisterRecipes() {
                             <TextInput
                                 style={styles.inputModo}
                                 placeholderTextColor="#fff"
-                                placeholder="Escreva um breve resumo sobre sua receita!!"
+                                placeholder="Escreva um breve resumo sobre a sua receita"
                                 multiline={true}
                                 value={inputAbout}
                                 onChangeText={(texto) => setInputAbout(texto)}
@@ -292,7 +292,7 @@ export default function RegisterRecipes() {
                             <TextInput
                                 style={styles.inputModo}
                                 placeholderTextColor="#fff"
-                                placeholder="Escreva um texto sobre sua receita!!"
+                                placeholder="Informações adicionais sobre sua receita"
                                 multiline={true}
                                 value={inputAdditionalInformation}
                                 onChangeText={(texto) => setInputAdditionalInformation(texto)}

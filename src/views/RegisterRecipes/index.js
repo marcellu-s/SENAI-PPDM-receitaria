@@ -34,21 +34,18 @@ export default function RegisterRecipes() {
 
         var recipe = new Object();
         recipe.title = inputTitle;
+        recipe.about = inputAbout;
+        recipe.author = userData.name;
         recipe.image = inputUrl;
-        recipe.duration = inputTime;
+        recipe.duration = inputTime + ' min';
         recipe.difficult = dificuldade;
-        recipe.duration = inputTime;
         recipe.portion = inputQts;
+        recipe.additionalInformation = inputAdditionalInformation;
         recipe.ingredients = ingredientes;
         recipe.methodPreparation = modoDePreparo;
         recipe.categories = categoria;
-        recipe.additionalInformation = '';
-        recipe.author = userData.name;
-        recipe.about = inputAbout;
-        recipe.additionalInformation = inputAdditionalInformation;
         recipe.creatorID = userData.id;
         postRecipe(recipe);
-
 
 
     }
@@ -289,14 +286,6 @@ export default function RegisterRecipes() {
                                 value={inputAbout}
                                 onChangeText={(texto) => setInputAbout(texto)}
                             />
-                            <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
-                                <TouchableOpacity onPress={() => addCategoria()}>
-                                    <AntDesign name="pluscircle" size={32} color="orange" />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => removeCategoria()}>
-                                    <AntDesign name="minuscircle" size={32} color="black" />
-                                </TouchableOpacity>
-                            </View>
                         </View>
                         <View style={{ gap: 5, }} >
                             <Text style={styles.textTitulo}>Informações Adicional:</Text>
@@ -308,14 +297,6 @@ export default function RegisterRecipes() {
                                 value={inputAdditionalInformation}
                                 onChangeText={(texto) => setInputAdditionalInformation(texto)}
                             />
-                            <View style={{ flexDirection: "row", justifyContent: "center", gap: 20, }}>
-                                <TouchableOpacity onPress={() => addCategoria()}>
-                                    <AntDesign name="pluscircle" size={32} color="orange" />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => removeCategoria()}>
-                                    <AntDesign name="minuscircle" size={32} color="black" />
-                                </TouchableOpacity>
-                            </View>
                         </View>
                         <View style={{ alignItems: 'center', marginTop: 10, }}>
                             <TouchableOpacity style={{ width: '100%', height: 50, justifyContent: 'center', borderRadius: 10, backgroundColor: 'orange' }} onPress={() => enviar()}>

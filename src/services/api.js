@@ -362,6 +362,8 @@ export async function getUserData(id) {
 
 export async function postRecipe(recipe) {
 
+    console.log(recipe);
+
     const tokenData = await getToken();
 
     try {

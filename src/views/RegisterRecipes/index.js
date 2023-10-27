@@ -28,7 +28,7 @@ export default function RegisterRecipes() {
     const [inputTitle, setInputTitle] = useState('');
     const [inputTexto, setInputTexto] = useState('');
     const [inputTextoModoDePreparo, setInputTextoModoDePreparo] = useState('');
-    const [inputTextoCategoria, setInputTextoCategoria] = useState([]);
+    const [inputTextoCategoria, setInputTextoCategoria] = useState('');
 
     function enviar() {
 

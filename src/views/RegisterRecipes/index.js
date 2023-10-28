@@ -181,31 +181,31 @@ export default function RegisterRecipes() {
                             value={inputUrl}
                             onChangeText={(texto) => setInputUrl(texto)}
                         />
-                        <View style={{ flexDirection: "row", alignItems: "center", gap: 10, }}>
+                        <View style={{ gap: 10, }}>
                             <Text style={styles.textTitulo2}>Tempo:</Text>
                             <TextInput
                                 style={styles.inputTempo}
                                 keyboardType="numeric"
                                 placeholderTextColor="#fff"
-                                placeholder="Min"
+                                placeholder="Duração"
                                 maxLength={3}
                                 value={inputTime}
                                 onChangeText={(texto) => setInputTime(texto)}
                             />
                         </View>
-                        <View style={{ flexDirection: "row", alignItems: "center", gap: 10, }}>
+                        <View style={{ gap: 10, }}>
                             <Text style={styles.textTitulo2}>Porções:</Text>
                             <TextInput
                                 style={styles.inputQts}
                                 keyboardType="numeric"
                                 placeholderTextColor="#fff"
-                                placeholder="Qts"
+                                placeholder="Porções"
                                 maxLength={2}
                                 value={inputQts}
                                 onChangeText={(texto) => setInputQts(texto)}
                             />
                         </View>
-                        <View style={{ flexDirection: "row", alignItems: "center", gap: 10, }}>
+                        <View style={{ gap: 10, }}>
                             <Text style={styles.textTitulo2}>Dificuldade:</Text>
                             <View style={{ width: '50%', height: 50, backgroundColor: "#242A37", borderRadius: 10, }}>
                                 <Picker style={{ color: '#fff', }} selectedValue={dificuldade} onValueChange={(value) => { setDificuldade(value) }}>
@@ -331,8 +331,8 @@ export default function RegisterRecipes() {
                             />
                         </View>
                         <View style={{ alignItems: 'center', marginTop: 10, }}>
-                            <TouchableOpacity style={{ width: '100%', height: 50, justifyContent: 'center', borderRadius: 10, backgroundColor: 'orange' }} onPress={() => enviar()}>
-                                <Text style={{ textAlign: 'center', fontSize: 20, color: '#fff' }}>Cadastrar</Text>
+                            <TouchableOpacity style={styles.sendBtn} onPress={() => enviar()}>
+                                <Text style={{textAlign: 'center', fontFamily: 'Poppins-Bold', fontSize: 20, color: '#fff'}}>ENVIAR</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -351,8 +351,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     textTitulo: {
-        fontSize: 26,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontFamily: 'Poppins-Bold'
     },
     input: {
         height: 50,
@@ -361,10 +361,12 @@ const styles = StyleSheet.create({
         padding: 10,
         color: '#fff',
         backgroundColor: '#242A37',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        fontFamily: 'Poppins-Regular'
     },
     textTitulo2: {
         fontSize: 20,
+        fontFamily: "Poppins-Bold"
     },
     inputTempo: {
         width: 80,
@@ -406,6 +408,16 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         gap: 20,
     },
+
+    sendBtn: {
+        width: '100%',
+        borderWidth: 1,
+        borderColor: '#FE8A07',
+        paddingVertical: 12,
+        borderRadius: 16,
+        backgroundColor: '#FE8A07'
+    },  
+
     inputModo: {
         height: 100,
         width: '100%',

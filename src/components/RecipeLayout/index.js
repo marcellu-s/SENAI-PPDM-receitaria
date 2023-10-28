@@ -119,7 +119,7 @@ const RecipeLayout = () => {
                             recipe.methodPreparation.map((item, index) => {
                                 return(
                                     <View style={styles.prepareItem} key={`methodPreparation-${index}`}>
-                                        <Text style={{color: '#333'}}>{index+1}</Text>
+                                        <Text style={{color: '#333', fontFamily: 'Poppins-Bold'}}>{index+1}</Text>
                                         <Text style={styles.text}>{item}</Text>
                                     </View>
                                 )

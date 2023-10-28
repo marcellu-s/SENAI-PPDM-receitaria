@@ -287,7 +287,7 @@ export default function RegisterRecipes() {
                                     categoria.map((item, indexItem) => {
                                         return (
 
-                                            <TextInput style={{ color: '#fff', fontSize: 20, padding: 10, backgroundColor: '#242A37', width: 150, borderRadius: 10, }} multiline={true} value={categoria[indexItem]} onChangeText={(texto) => handleTextChangeCategoria(texto, indexItem)} />
+                                            <TextInput key={indexItem} style={{ color: '#fff', fontSize: 20, padding: 10, backgroundColor: '#242A37', width: 150, borderRadius: 10, }} multiline={true} value={categoria[indexItem]} onChangeText={(texto) => handleTextChangeCategoria(texto, indexItem)} />
                                         )
                                     })
                                 }

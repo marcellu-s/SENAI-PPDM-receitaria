@@ -210,9 +210,9 @@ export default function RegisterRecipes() {
                             <View style={{ width: '50%', height: 50, backgroundColor: "#242A37", borderRadius: 10, }}>
                                 <Picker style={{ color: '#fff', }} selectedValue={dificuldade} onValueChange={(value) => { setDificuldade(value) }}>
                                     <Picker.Item value='Selecione' label="Selecione" />
-                                    <Picker.Item value='Baixo' label="Baixo" />
-                                    <Picker.Item value='Medio' label="Médio" />
-                                    <Picker.Item value='Alto' label="Alto" />
+                                    <Picker.Item value='Fácil' label="Fácil" />
+                                    <Picker.Item value='Média' label="Média" />
+                                    <Picker.Item value='Difícil' label="Difícil" />
 
                                 </Picker>
                             </View>

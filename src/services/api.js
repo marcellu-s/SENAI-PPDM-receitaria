@@ -393,13 +393,20 @@ export async function postRecipe(title,about,author,image,duration,difficult,por
         
         const data = await response.json();
 
+        if (data.code === 201) {
+
+            return {
+                status: true,
+                msg: data.msg
+            };
+        }
+
         return {
+            status: false,
             msg: data.msg
         };
 
     } catch (err) {
-
-        console.log(err)
 
         return {
             msg: err
@@ -452,8 +459,6 @@ export async function setFavRecipe(userId, recipeId) {
         }
 
     } catch (err) {
-
-        console.log(err);
 
         return {
             status: false,

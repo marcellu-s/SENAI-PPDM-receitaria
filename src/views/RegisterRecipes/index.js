@@ -50,6 +50,23 @@ export default function RegisterRecipes() {
             userData.id
         );
 
+        if (feedback.status) {
+
+            setDificuldade('Selecione');
+            setIngredientes([]);
+            setModoDePreparo([]);
+            setCategoria([]);
+            setInputAdditionalInformation('');
+            setInputAbout('');
+            setInputQts('');
+            setInputTime('');
+            setInputUrl('');
+            setInputTitle('');
+            setInputTexto('');
+            setInputTextoModoDePreparo('');
+            setInputTextoCategoria('');
+        }
+
         setIsLoading(false);
 
         alert(feedback.msg)

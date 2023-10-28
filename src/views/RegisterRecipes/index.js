@@ -30,7 +30,7 @@ export default function RegisterRecipes() {
     const [inputTextoModoDePreparo, setInputTextoModoDePreparo] = useState('');
     const [inputTextoCategoria, setInputTextoCategoria] = useState('');
 
-    function enviar() {
+    async function enviar() {
 
         var recipe = new Object();
         recipe.title = inputTitle;
@@ -45,9 +45,10 @@ export default function RegisterRecipes() {
         recipe.methodPreparation = modoDePreparo.join(';');
         recipe.categories = categoria.join(';');
         recipe.creatorID = userData.id;
-        postRecipe(recipe);
 
+        const feedback =  await postRecipe(recipe);
 
+        alert(feedback.msg)
     }
 
     const handleTextChange = (texto, indexItem) => {

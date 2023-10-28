@@ -362,8 +362,6 @@ export async function getUserData(id) {
 
 export async function postRecipe(recipe) {
 
-    console.log(recipe);
-
     const tokenData = await getToken();
 
     try {
@@ -373,22 +371,31 @@ export async function postRecipe(recipe) {
                 'Context-type': 'application/json',
                 'Authorization': `Bearer ${tokenData.token}`,
             },
-            body: JSON.stringify(recipe)
+            body: JSON.stringify(
+                recipe.title,
+                recipe.about,
+                recipe.author,
+                recipe.image,
+                recipe.duration,
+                recipe.difficult,
+                recipe.portion,
+                recipe.additionalInformation,
+                recipe.ingredients,
+                recipe.methodPreparation,
+                recipe.categories,
+                recipe.creatorID,
+            )
         });
+
+
         const data = await response.json();
-        console.log(data);
 
+        return {
+            msg: data.msg
+        };
 
-
-        if (data.status === "error") {
-
-            return {
-                status: false,
-                msg: data.msg
-            };
-        }
     } catch (err) {
-        console.log(`Deu erro ${err}`)
+        console.log(err)
     }
 }
 

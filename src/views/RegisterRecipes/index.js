@@ -42,7 +42,7 @@ export default function RegisterRecipes() {
             inputUrl,
             inputTime + ' min',
             dificuldade,
-            inputQts,
+            inputQts + ' porções',
             inputAdditionalInformation,
             ingredientes.join(';'),
             modoDePreparo.join(';'),

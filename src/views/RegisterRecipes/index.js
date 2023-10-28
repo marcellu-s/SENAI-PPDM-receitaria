@@ -34,7 +34,7 @@ export default function RegisterRecipes() {
         const feedback =  await postRecipe(
             inputTitle,
             inputAbout,
-            userData.name,
+            `${userData.name} ${userData.lastName}`,
             inputUrl,
             inputTime + ' min',
             dificuldade,

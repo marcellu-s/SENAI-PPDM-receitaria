@@ -61,6 +61,7 @@ export async function loginCall(email, password) {
                 status: true,
                 msg: "Log In efetuado com sucesso!",
                 name: data.name,
+                lastName: data.lastName,
                 email: data.email,
                 id: data.id
             }
@@ -458,5 +459,53 @@ export async function setFavRecipe(userId, recipeId) {
             status: false,
             msg: "Opa, um erro aconteceu ao realizar essa ação!"
         };
+    }
+}
+
+export async function editUser(userId, name, lastName, email, oldPassword, newPassword) {
+
+    try {
+
+        const tokenData = await getToken();
+
+        const payload = {
+            userId,
+            name,
+            lastName,
+            email,
+            newPassword,
+            oldPassword
+        }
+
+        const response = await fetch(`${baseURL}/user`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${tokenData.token}`,
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (data.code == 200) {
+
+            return {
+                status: true,
+                msg: data.msg
+            }
+        } else {
+
+            return {
+                status: false,
+                msg: data.msg
+            }
+        }
+    } catch(err) {
+
+        return {
+            status: false,
+            msg: "Erro ao tentar editar o usuário! Tente novamente em instantes."
+        }
     }
 }

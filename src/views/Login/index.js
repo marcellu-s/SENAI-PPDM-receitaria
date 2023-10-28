@@ -4,7 +4,6 @@ import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableO
 import { useContext, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { loginCall } from '../../services/api';
 import { getToken, getUserDataInAsyncStorage } from '../../services/verifications';
 import { UserContext } from '../../contexts/UserContext';
@@ -84,12 +83,15 @@ export default function LoginScreen() {
 
                             setUser({
                                 name: isSuccess.name,
+                                lastName: isSuccess.lastName,
                                 email: isSuccess.email,
                                 id: isSuccess.id
                             });
 
                             await AsyncStorage.setItem('userData', JSON.stringify({
                                 name: isSuccess.name,
+                                lastName: isSuccess.lastName,
+                                email: isSuccess.email,
                                 id: isSuccess.id
                             }));
                             
@@ -103,9 +105,9 @@ export default function LoginScreen() {
                         } else {
 
                             setInload(false);
-
                             alert(isSuccess.msg);
                         }
+
                     }}>
                         <Text style={{textAlign: 'center', fontFamily: 'Poppins-Bold', fontSize: 20, color: '#fff'}}>ENTRAR</Text>
                     </TouchableOpacity>

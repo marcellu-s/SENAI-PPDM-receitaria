@@ -1,157 +1,214 @@
-import { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView, Image } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { getUserData } from '../../services/api';
+import { useState, useContext, useEffect } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView, Image, ActivityIndicator } from 'react-native';
+import { AntDesign, Feather } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { getUserData, editUser } from '../../services/api';
+import { getUserDataInAsyncStorage } from '../../services/verifications';
 import { UserContext } from '../../contexts/UserContext';
+
+import profilePic from '../../assets/images/transferir.png'
 
 export default function ProfileScreen() {
 
-    const [nome, setNome] = useState('');
-    const [sobrenome, setSobrenome] = useState('');
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [ name, setName ] = useState('');
+    const [ lastName, setLastName] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ confirmPassword, setConfirmPassword ] = useState('');
+    const [ hidePass, setHidePass ] = useState(true);
+    const [ hideConfirmPass, setHideConfirmPass ] = useState(true);
+    const [ isEdit, setIsEdit ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
 
-    const { userData } = useContext(UserContext);
+    const { userData, setUser } = useContext(UserContext);
 
     useEffect(() => {
 
         async function getUser() {
 
+            setIsLoading(true);
+    
             const data = await getUserData(userData.id);
-
             
             if (data.status === false) {
                 
                 alert(data.msg);
-                
-                return;
+    
+            } else {
+    
+                const user = data.user;
+    
+                setName(user.name);
+                setLastName(user.lastName);
+                setEmail(user.email);
             }
             
-            const user = data.user;
-
-            setNome(user.name);
-            setSobrenome(user.lastName);
-            setEmail(user.email);
-            setSenha(user.password);
+            setIsLoading(false)
         }
 
         getUser();
 
-
     }, []);
 
-    function editar() {
+    async function editar() {
 
-        if (onPress = true) {
-            alert('Dados alterados com sucesso!')
-            return;
+        setIsLoading(true)
+
+        const result = await editUser(
+            userData.id,
+            name,
+            lastName,
+            email,
+            password,
+            confirmPassword
+        )
+
+        if (result.status) {
+            
+            // Troca os dados no LocalStorage
+            await AsyncStorage.setItem('userData', JSON.stringify({
+                name: name,
+                lastName: lastName,
+                email: email,
+                id: userData.id
+            }));
+            // Troca os dados no Contexto
+            setUser(JSON.parse(await getUserDataInAsyncStorage()));
+
+            setPassword('');
+            setConfirmPassword('')
+            setHidePass(true);
+            setHideConfirmPass(true);
+            setIsEdit(false);
         }
+        
+        setIsLoading(false);
 
+        alert(result.msg);
+    }
+
+    if (isLoading) {
+
+        return(
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#FE8A07" />
+                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16 }}>AGUARDE...</Text>
+            </View>
+        );
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ paddingVertical: 40, backgroundColor: "fff", paddingHorizontal: 20 }}>
-                <View style={{flexDirection:'row', justifyContent: 'flex-end'}}>
-                    <TouchableOpacity>
-                        <Text style={{ fontSize: 17, fontFamily: 'Poppins-Bold'}}>Salvar</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-                    <Text style={{ fontSize: 32, fontFamily: 'Poppins-Bold', textAlign: 'center', marginTop: 40 }}>Meu Perfil</Text>
-                </View>
-                <View style={{ marginTop: 10}}>
-                    <Image style={{width:100 , height:100 , borderRadius: 100/2, marginLeft: 135 }} source={require('../../assets/images/transferir.png')}/>
-                    <Text style={styles.subtitle}> {`${nome} ${sobrenome} `} </Text>
-                </View>
-                <View style={styles.inputWrapperDouble}>
-                    <TextInput value={nome} style={styles.input} onChangeText={(value) => setNome(value)} placeholderTextColor={'#ffff'} placeholder='Nome' />
-                    <TextInput value={sobrenome} style={styles.input} onChangeText={(value) => setSobrenome(value)} placeholderTextColor={'#ffff'} placeholder='Sobrenome' />
-                </View>
-                <View style={styles.inputWrapper}>
-                    <View style={styles.inputContainer}>
-                        <TextInput value={email} style={styles.input2} onChangeText={(value) => setEmail(value)} placeholderTextColor={'#ffff'} placeholder='Email' />
+        <SafeAreaView style={styles.mainContainer}>
+            <ScrollView style={styles.scrollViewContent}>
+                <View style={{paddingVertical: 40}}>
+                    <View style={{ flexDirection: 'row', marginBottom: 24, justifyContent: isEdit ? 'space-between' : 'flex-start' }}>
+                        <TouchableOpacity onPress={() => setIsEdit(!isEdit)}>
+                            <Text style={styles.options}>{isEdit ? 'Cancelar' : 'Editar'}</Text>
+                        </TouchableOpacity>
+                        {
+                            isEdit &&
+                            <TouchableOpacity onPress={() => editar()}>
+                                <Text style={styles.options}>Salvar</Text>
+                            </TouchableOpacity>
+                        }
                     </View>
-                    <View style={styles.inputContainer}>
-                        <TextInput value={senha} style={styles.input2} onChangeText={(value) => setSenha(value)} placeholderTextColor={'#ffff'} placeholder='Senha' />
+                    <View style={{alignItems: 'center', gap: 12}}>
+                        <Image style={{width: 150, height: 150, borderRadius: 100}} source={profilePic} />
+                        <Text style={styles.splashName}>{`${userData.name} ${userData.lastName}`}</Text>
+                    </View>
+                    <View>
+                        <View style={{flexDirection: 'row', gap: 16, marginTop: 32}}>
+                            <TextInput style={styles.inputSearchDouble} editable={isEdit} placeholder="Nome" value={name} autoCapitalize='none' keyboardType='default' placeholderTextColor={'#fff'} onChangeText={(value) => setName(value)} />
+                            <TextInput style={styles.inputSearchDouble} editable={isEdit} placeholder="Sobrenome" value={lastName} autoCapitalize='none' keyboardType='default' placeholderTextColor={'#fff'} onChangeText={(value) => setLastName(value)} />
+                        </View>
+                        <View style={styles.inputSearch}>
+                            <TextInput style={styles.input} editable={isEdit} placeholder="E-mail" value={email} autoCapitalize='none' keyboardType='email-address' placeholderTextColor={'#fff'} onChangeText={(value) => setEmail(value)} />
+                        </View>
+                        {
+                            isEdit &&
+                            <View>
+                                <View style={styles.inputSearch}>
+                                    <TextInput style={styles.input} placeholder="Senha antiga" value={password} autoCapitalize='none' secureTextEntry={hidePass} placeholderTextColor={'#fff'} onChangeText={(value) => setPassword(value)} />
+                                    <TouchableOpacity style={styles.searchIcon} onPress={() => setHidePass(!hidePass)}>
+                                        {
+                                            hidePass ? <Feather name="eye-off" size={24} color="white" /> : <AntDesign name="eye" size={24} color="white" />
+                                        }
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.inputSearch}>
+                                    <TextInput style={styles.input} placeholder="Nova senha" value={confirmPassword} autoCapitalize='none' secureTextEntry={hideConfirmPass} placeholderTextColor={'#fff'} onChangeText={(value) => setConfirmPassword(value)} />
+                                    <TouchableOpacity style={styles.searchIcon} onPress={() => setHideConfirmPass(!hideConfirmPass)}>
+                                        {
+                                            hideConfirmPass ? <Feather name="eye-off" size={24} color="white" /> : <AntDesign name="eye" size={24} color="white" />
+                                        }
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        }
                     </View>
                 </View>
-                <View style={{ marginVertical: 20, paddingVertical: 20 }}>
-                    <TouchableOpacity style={styles.button} onPress={() => editar()}>
-                        <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', fontFamily: 'Poppins-Bold' }}>EDITAR</Text>
-                    </TouchableOpacity>
-                </View>
-        </ScrollView>
-        </SafeAreaView >
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
 
 const styles = StyleSheet.create({
 
-    subtitle: {
-        
-        marginTop: 15,
+    homeScreenContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+
+    scrollViewContent: {
+        paddingHorizontal: 20,
+    },
+
+    splashName: {
         fontSize: 24,
-        fontWeight: '500',
-        textAlign: 'center',
-        fontFamily: 'Poppins-Light',
+        fontFamily: 'Poppins-Bold',
+        textTransform: 'capitalize'
     },
 
-    inputWrapper: {
-        marginTop: 20,
-        gap: 12
+    inputSearch: {
+        position: 'relative',
+        marginTop: 32,
     },
 
-    inputContainer: {
-        gap: 4,
-
-    },
-
-    inputWrapperDouble: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        gap: 12,
-
+    inputSearchDouble: {
+        flex: 1,
+        borderWidth: 1,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 20,
+        fontSize: 16,
+        fontFamily: 'Poppins-Regular',
+        backgroundColor: '#242A37',
+        color: '#fff',
     },
 
     input: {
-        fontFamily: 'Poppins-Light',
-        marginTop: 70,
         borderWidth: 1,
-        borderColor: '#000',
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 20,
+        fontSize: 16,
+        fontFamily: 'Poppins-Regular',
         backgroundColor: '#242A37',
-        borderRadius: 8,
-        paddingHorizontal: 12,
-        paddingVertical: 6,
-        color: '#ffff',
-        width: '45%',
-
+        color: '#fff',
     },
 
-    input2: {
-        fontFamily: 'Poppins-Light',
-        marginTop: 20,
-        borderWidth: 1,
-        borderColor: '#000',
-        backgroundColor: '#242A37',
-        borderRadius: 8,
-        paddingHorizontal: 12,
-        paddingVertical: 6,
-        width: '100%',
-        color: '#ffff',
-
+    searchIcon: {
+        position: 'absolute',
+        right: 16,
+        top: 10,
     },
 
-    inputContainerDouble: {
-        flexGrow: 1
-    },
-
-    button: {
-        width: '100%',
-        backgroundColor: '#FE8A07',
-        padding: 12,
-        borderRadius: 8
+    options: {
+        fontFamily: "Poppins-Bold",
+        fontSize: 16,
+        color: '#333',
     }
 
 });

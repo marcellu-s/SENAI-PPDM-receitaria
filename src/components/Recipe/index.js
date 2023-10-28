@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     recipeTitle: {
         fontFamily: 'Poppins-Bold',
         fontSize: 24,
+        maxWidth: '80%'
     },
 
     recipeStars: {

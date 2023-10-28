@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
 
@@ -14,6 +14,8 @@ import { postRecipe } from "../../services/api";
 export default function RegisterRecipes() {
 
     const { userData } = useContext(UserContext)
+
+    const [ isLoading, setIsLoading ] = useState(false);
 
     const [dificuldade, setDificuldade] = useState('Selecione');
     const [ingredientes, setIngredientes] = useState([]);
@@ -31,6 +33,8 @@ export default function RegisterRecipes() {
 
     async function enviar() {
 
+        setIsLoading(true);
+
         const feedback =  await postRecipe(
             inputTitle,
             inputAbout,
@@ -45,6 +49,8 @@ export default function RegisterRecipes() {
             categoria.join(';'),
             userData.id
         );
+
+        setIsLoading(false);
 
         alert(feedback.msg)
     }
@@ -120,6 +126,16 @@ export default function RegisterRecipes() {
 
         }
 
+    }
+
+    if (isLoading) {
+
+        return(
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#FE8A07" />
+                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16 }}>AGUARDE...</Text>
+            </View>
+        );
     }
 
     return (

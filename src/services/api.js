@@ -360,34 +360,36 @@ export async function getUserData(id) {
     }
 }
 
-export async function postRecipe(recipe) {
-
-    const tokenData = await getToken();
+export async function postRecipe(title,about,author,image,duration,difficult,portion,additionalInformation,ingredients,methodPreparation,categories,creatorID) {
 
     try {
+        
+        const tokenData = await getToken();
+
+        const payload = {
+            title,
+            about,
+            author,
+            image,
+            duration,
+            difficult,
+            portion,
+            additionalInformation,
+            ingredients,
+            methodPreparation,
+            categories,
+            creatorID
+        }
+
         const response = await fetch(`${baseURL}/recipe`, {
             method: 'POST',
             headers: {
-                'Context-type': 'application/json',
-                'Authorization': `Bearer ${tokenData.token}`,
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${tokenData.token}`
             },
-            body: JSON.stringify(
-                recipe.title,
-                recipe.about,
-                recipe.author,
-                recipe.image,
-                recipe.duration,
-                recipe.difficult,
-                recipe.portion,
-                recipe.additionalInformation,
-                recipe.ingredients,
-                recipe.methodPreparation,
-                recipe.categories,
-                recipe.creatorID,
-            )
+            body: JSON.stringify(payload)
         });
-
-
+        
         const data = await response.json();
 
         return {
@@ -395,7 +397,12 @@ export async function postRecipe(recipe) {
         };
 
     } catch (err) {
+
         console.log(err)
+
+        return {
+            msg: err
+        };
     }
 }
 

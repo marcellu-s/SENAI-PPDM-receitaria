@@ -1,20 +1,19 @@
 import { useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons, AntDesign, Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { Picker } from "@react-native-picker/picker";
+
+
 import { UserContext } from "../../contexts/UserContext";
 import { postRecipe } from "../../services/api";
 
-import { useNavigation } from '@react-navigation/native';
 
 
 
 export default function RegisterRecipes() {
 
     const { userData } = useContext(UserContext)
-
-    const navigation = useNavigation();
 
     const [dificuldade, setDificuldade] = useState('Selecione');
     const [ingredientes, setIngredientes] = useState([]);
@@ -32,21 +31,20 @@ export default function RegisterRecipes() {
 
     async function enviar() {
 
-        var recipe = new Object();
-        recipe.title = inputTitle;
-        recipe.about = inputAbout;
-        recipe.author = userData.name;
-        recipe.image = inputUrl;
-        recipe.duration = inputTime + ' min';
-        recipe.difficult = dificuldade;
-        recipe.portion = inputQts;
-        recipe.additionalInformation = inputAdditionalInformation;
-        recipe.ingredients = ingredientes.join(';');
-        recipe.methodPreparation = modoDePreparo.join(';');
-        recipe.categories = categoria.join(';');
-        recipe.creatorID = userData.id;
-
-        const feedback =  await postRecipe(recipe);
+        const feedback =  await postRecipe(
+            inputTitle,
+            inputAbout,
+            userData.name,
+            inputUrl,
+            inputTime + ' min',
+            dificuldade,
+            inputQts,
+            inputAdditionalInformation,
+            ingredientes.join(';'),
+            modoDePreparo.join(';'),
+            categoria.join(';'),
+            userData.id
+        );
 
         alert(feedback.msg)
     }

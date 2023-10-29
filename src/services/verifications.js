@@ -2,6 +2,47 @@
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+export function isRegiserValid(name, lastName, email, password, confirmPassword) {
+
+    if (name && lastName && email && password && confirmPassword) {
+
+        if (password.length < 8) {
+
+            return {
+                status: false,
+                msg: "A senha deve ter no mínimo 8 caracteres!"
+            }
+        }
+
+        if (password == confirmPassword) {
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/gm;
+
+            if (emailRegex.test(email)) {
+
+                return {
+                    status: true
+                }
+            }
+
+            return {
+                status: false,
+                msg: "Informe um e-mail válido!"
+            }
+        }
+
+        return {
+            status: false,
+            msg: "As senhas não conferem! Verifique e tente novamente"
+        }
+    }
+
+    return {
+        status: false,
+        msg: "Dados estão faltando! Verifique e tente novamente"
+    }
+}
+
 // Verificar o email
 export function verifyEmail(email) {
 

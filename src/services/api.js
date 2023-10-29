@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { getToken, verifyEmail } from './verifications';
+import { getToken } from './verifications';
 
 const baseURL = "https://receitaria-api.vercel.app";
 
@@ -12,14 +12,6 @@ export async function loginCall(email, password) {
         return {
             status: false,
             msg: "Preencha os campos de e-mail e senha antes de entrar!"
-        };
-    }
-
-    if (verifyEmail(email).status === false) {
-
-        return {
-            status: false,
-            msg: "Informe um e-mail válido"
         };
     }
 
@@ -92,15 +84,6 @@ export async function registerCall({ name, lastName, email, password }) {
         return {
             status: false,
             msg: "Todos os campos são obrigatórios"
-        };
-    }
-
-    // Validações
-    if (verifyEmail(email).status === false) {
-
-        return {
-            status: false,
-            msg: "Informe um e-mail válido"
         };
     }
 

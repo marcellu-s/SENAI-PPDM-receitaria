@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign, Feather } from '@expo/vector-icons';
-import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { useState } from 'react';
 import { registerCall } from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
 
 import logo from '../../assets/images/logo.png';
+import { isRegiserValid } from '../../services/verifications';
 
 export default function RegisterScreen() {
 
@@ -18,6 +19,17 @@ export default function RegisterScreen() {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ confirmPassword, setConfirmPassword ] = useState('');
+    const [ inLoad, setInLoad ] = useState(false);
+
+    if (inLoad) {
+
+        return(
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#FE8A07" />
+                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 16 }}>AGUARDE...</Text>
+            </View>
+        );
+    }
 
     return(
         <SafeAreaView style={styles.homeScreenContainer}>
@@ -56,11 +68,16 @@ export default function RegisterScreen() {
                     <View style={{marginTop: 32}}>
                         <TouchableOpacity style={styles.btn} onPress={async () => {
 
-                            if (password != confirmPassword) {
+                            const result = isRegiserValid(name, lastName, email, password, confirmPassword);
 
-                                alert("As senhas não conferem!");
+                            if (result.status === false) {
+
+                                alert(result.msg);
+
                                 return;
                             }
+
+                            setInLoad(true);
 
                             const isSuccess = await registerCall({
                                 name, lastName, email, password
@@ -68,12 +85,25 @@ export default function RegisterScreen() {
 
                             if (isSuccess.status === true) {
 
+                                setName('');
+                                setLastName('');
+                                setEmail('');
+                                setPassword('');
+                                setConfirmPassword('');
+                                setHidePass(true);
+                                setHideConfirmPass(true);
+
+                                setInLoad(false);
+
                                 alert(isSuccess.msg);
+
                                 navigation.navigate('Login');
+
                             } else {
+
+                                setInLoad(false);
     
                                 alert(isSuccess.msg);
-                                return;
                             }
 
                         }}>

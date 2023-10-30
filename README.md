@@ -26,7 +26,7 @@ Siga os passos abaixo para clonar, instalar dependências e executar o aplicativ
 
 ```bash
 # Clone este repositório
-git clone https://github.com/marcellu-s/SENAI-PPDM-receitaria.git
+git clone https://github.com/marcellu-s/receitaria-primavera.git
 
 # Navegue para o diretório do projeto
 cd SENAI-PPDM-receitaria

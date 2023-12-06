@@ -7,7 +7,7 @@ import { getUserData, editUser } from '../../services/api';
 import { getUserDataInAsyncStorage } from '../../services/verifications';
 import { UserContext } from '../../contexts/UserContext';
 
-import profilePic from '../../assets/images/transferir.png'
+import profilePic from '../../assets/images/image.jpg'
 
 export default function ProfileScreen() {
 

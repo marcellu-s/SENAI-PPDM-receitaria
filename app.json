@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mckas.receitaria"
     },
     "web": {
       "favicon": "./src/assets/images/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d2b014ff-8dc9-4f86-99bb-3f2c97d7c80d"
+      }
     }
   }
 }

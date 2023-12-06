@@ -18,6 +18,10 @@
 - Favoritar receitas específicas.
 - Criar suas próprias receitas personalizadas.
 
+## Baixe e instale, no seu dispositivo android:
+
+- [Clique aqui](https://expo.dev/artifacts/eas/6NHqk9bPpSF9yCpGYe2vVp.apk)
+
 ## Instalação e Execução
 Siga os passos abaixo para clonar, instalar dependências e executar o aplicativo:
 

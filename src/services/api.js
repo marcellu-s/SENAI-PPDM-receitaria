@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { getToken } from './verifications';
 
-const baseURL = "https://receitaria-api.vercel.app";
+const baseURL = "https://api-receitaria-primavera.vercel.app";
 
 // Efetuar login no app
 export async function loginCall(email, password) {

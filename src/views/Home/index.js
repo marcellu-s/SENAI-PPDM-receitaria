@@ -11,7 +11,7 @@ const HomeScreen = () => {
         <View style={{flex: 1, backgroundColor: '#fff'}}>
             <ScrollView >
                 <SafeAreaView style={styles.homeScreenContainer}>
-                    <StatusBar style="auto" />
+                    <StatusBar style="dark" />
                     <HeaderApp />
                     <RecipesDisplay />
                 </SafeAreaView>

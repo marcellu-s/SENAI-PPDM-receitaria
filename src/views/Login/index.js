@@ -53,7 +53,7 @@ export default function LoginScreen() {
 
     return(
         <SafeAreaView style={styles.homeScreenContainer}>
-            <StatusBar style="auto" />
+            <StatusBar style="dark" />
             <ScrollView style={styles.scrollViewContent}>
                 <View style={{alignItems: 'center'}}>
                     <Image style={{width: 200, height: 200}} source={logo} />

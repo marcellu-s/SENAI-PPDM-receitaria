@@ -33,7 +33,7 @@ export default function RegisterScreen() {
 
     return(
         <SafeAreaView style={styles.homeScreenContainer}>
-            <StatusBar style="auto" />
+            <StatusBar style="dark" />
             <ScrollView style={styles.scrollViewContent}>
                 <View style={{paddingVertical: 40}}>
                     <View style={{alignItems: 'center'}}>

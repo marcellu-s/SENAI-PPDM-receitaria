@@ -10,7 +10,7 @@ const RecipeScreen = () => {
         <View>
             <ScrollView>
                 <SafeAreaView style={styles.RecipeScreenContainer}>
-                    <StatusBar style="auto" />
+                    <StatusBar style="dark" />
                     <RecipeLayout />
                 </SafeAreaView>
             </ScrollView>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "receitaria",
     "slug": "receitaria",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "userInterfaceStyle": "light",
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "foregroundImage": "./src/assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.mckas.receitaria"
@@ -29,7 +29,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d2b014ff-8dc9-4f86-99bb-3f2c97d7c80d"
+        "projectId": "f3eece07-c95b-447b-912c-c9936280d876"
       }
     }
   }

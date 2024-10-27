@@ -159,7 +159,7 @@ export default function RegisterRecipes() {
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView >
                 <SafeAreaView style={styles.homeScreenContainer}>
-                    <StatusBar style="auto" />
+                    <StatusBar style="dark" />
                     <View>
                         <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 32, textAlign: 'center' }}>Crie sua receita!</Text>
                     </View>

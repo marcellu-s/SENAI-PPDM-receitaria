@@ -120,7 +120,7 @@ const FavoritesScreen = () => {
         <View style={{flex: 1, backgroundColor: '#fff'}}>
             <ScrollView >
                 <SafeAreaView style={styles.homeScreenContainer}>
-                    <StatusBar style="auto" />
+                    <StatusBar style="dark" />
                     <Header />
                     <RecipesDisplay />
                 </SafeAreaView>
